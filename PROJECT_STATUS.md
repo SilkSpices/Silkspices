@@ -33,3 +33,4 @@
 - Categories
 - Product Cards
 - Footer
+✅ Global Design System
