@@ -1,1 +1,333 @@
+/* ==========================================================
+   SILK SPICES
+   MOBILE.CSS
+   Global Responsive Styles
+==========================================================*/
 
+
+/* ----------------------------------------------------------
+   LARGE TABLETS
+-----------------------------------------------------------*/
+
+@media(max-width:1200px){
+
+.container{
+
+    width:min(94%,var(--container));
+
+}
+
+.section{
+
+    padding:70px 20px;
+
+}
+
+}
+
+
+/* ----------------------------------------------------------
+   TABLETS
+-----------------------------------------------------------*/
+
+@media(max-width:992px){
+
+.container{
+
+    width:94%;
+
+}
+
+.section{
+
+    padding:65px 20px;
+
+}
+
+.section-title{
+
+    font-size:2rem;
+
+}
+
+.section-subtitle{
+
+    margin-bottom:40px;
+
+}
+
+.btn{
+
+    padding:13px 24px;
+
+}
+
+.card{
+
+    border-radius:16px;
+
+}
+
+}
+
+
+/* ----------------------------------------------------------
+   MOBILE
+-----------------------------------------------------------*/
+
+@media(max-width:768px){
+
+html{
+
+    font-size:15px;
+
+}
+
+body{
+
+    overflow-x:hidden;
+
+}
+
+.container{
+
+    width:92%;
+
+}
+
+.section{
+
+    padding:60px 18px;
+
+}
+
+.section-title{
+
+    font-size:1.8rem;
+
+}
+
+.section-subtitle{
+
+    font-size:.95rem;
+
+    margin-bottom:35px;
+
+}
+
+.btn{
+
+    width:100%;
+
+    justify-content:center;
+
+}
+
+img{
+
+    max-width:100%;
+
+    height:auto;
+
+}
+
+input,
+textarea,
+select{
+
+    font-size:16px;
+
+}
+
+}
+
+
+/* ----------------------------------------------------------
+   SMALL MOBILE
+-----------------------------------------------------------*/
+
+@media(max-width:576px){
+
+.container{
+
+    width:90%;
+
+}
+
+.section{
+
+    padding:50px 16px;
+
+}
+
+h1{
+
+    font-size:2rem;
+
+}
+
+h2{
+
+    font-size:1.6rem;
+
+}
+
+h3{
+
+    font-size:1.15rem;
+
+}
+
+p{
+
+    font-size:.95rem;
+
+}
+
+.btn{
+
+    padding:14px 20px;
+
+}
+
+}
+
+
+/* ----------------------------------------------------------
+   EXTRA SMALL DEVICES
+-----------------------------------------------------------*/
+
+@media(max-width:400px){
+
+html{
+
+    font-size:14px;
+
+}
+
+.container{
+
+    width:88%;
+
+}
+
+.section{
+
+    padding:45px 14px;
+
+}
+
+}
+
+
+/* ----------------------------------------------------------
+   TOUCH DEVICES
+-----------------------------------------------------------*/
+
+@media(hover:none){
+
+.btn:hover,
+
+.card:hover{
+
+    transform:none;
+
+    box-shadow:inherit;
+
+}
+
+}
+
+
+/* ----------------------------------------------------------
+   LANDSCAPE PHONES
+-----------------------------------------------------------*/
+
+@media(max-height:500px) and (orientation:landscape){
+
+.section{
+
+    padding:40px 20px;
+
+}
+
+}
+
+
+/* ----------------------------------------------------------
+   REDUCED MOTION
+-----------------------------------------------------------*/
+
+@media(prefers-reduced-motion:reduce){
+
+*{
+
+    animation:none !important;
+
+    transition:none !important;
+
+    scroll-behavior:auto !important;
+
+}
+
+}
+
+
+/* ----------------------------------------------------------
+   HIGH RESOLUTION DISPLAYS
+-----------------------------------------------------------*/
+
+@media(min-resolution:2dppx){
+
+img{
+
+    image-rendering:auto;
+
+}
+
+}
+
+
+/* ----------------------------------------------------------
+   PRINT STYLES
+-----------------------------------------------------------*/
+
+@media print{
+
+body{
+
+    background:white;
+
+    color:black;
+
+}
+
+.site-header,
+
+.site-footer,
+
+.menu-toggle,
+
+.mobile-menu,
+
+.menu-overlay{
+
+    display:none !important;
+
+}
+
+.section{
+
+    padding:20px 0;
+
+}
+
+a{
+
+    color:black;
+
+    text-decoration:underline;
+
+}
+
+}
