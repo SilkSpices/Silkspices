@@ -1,1 +1,457 @@
+/* ==========================================================
+   SILK SPICES
+   FOOTER.CSS
+   Footer Styles
+==========================================================*/
 
+
+/* ----------------------------------------------------------
+   FOOTER
+-----------------------------------------------------------*/
+
+.site-footer{
+
+    background:#2F1608;
+
+    color:#F7E8D6;
+
+    margin-top:80px;
+
+}
+
+.footer-container{
+
+    max-width:var(--container);
+
+    margin:auto;
+
+    padding:70px 20px 40px;
+
+}
+
+
+/* ----------------------------------------------------------
+   FOOTER GRID
+-----------------------------------------------------------*/
+
+.footer-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        1.5fr
+        1fr
+        1fr
+        1.2fr;
+
+    gap:40px;
+
+}
+
+
+/* ----------------------------------------------------------
+   BRAND SECTION
+-----------------------------------------------------------*/
+
+.footer-brand{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:18px;
+
+}
+
+.footer-logo{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:14px;
+
+}
+
+.footer-logo img{
+
+    width:60px;
+
+    height:60px;
+
+    object-fit:contain;
+
+}
+
+.footer-logo-text{
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+.footer-logo-title{
+
+    color:white;
+
+    font-size:1.4rem;
+
+    font-weight:700;
+
+}
+
+.footer-logo-subtitle{
+
+    color:#DDBA95;
+
+    font-size:.85rem;
+
+}
+
+.footer-description{
+
+    color:#DDBA95;
+
+    line-height:1.8;
+
+    max-width:340px;
+
+}
+
+
+/* ----------------------------------------------------------
+   FOOTER TITLES
+-----------------------------------------------------------*/
+
+.footer-title{
+
+    color:white;
+
+    margin-bottom:20px;
+
+    font-size:1.1rem;
+
+    font-weight:700;
+
+}
+
+
+/* ----------------------------------------------------------
+   FOOTER LINKS
+-----------------------------------------------------------*/
+
+.footer-links{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:14px;
+
+}
+
+.footer-links a{
+
+    color:#DDBA95;
+
+    transition:var(--transition);
+
+}
+
+.footer-links a:hover{
+
+    color:white;
+
+    padding-left:6px;
+
+}
+
+
+/* ----------------------------------------------------------
+   CONTACT INFO
+-----------------------------------------------------------*/
+
+.footer-contact{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:16px;
+
+}
+
+.footer-contact-item{
+
+    display:flex;
+
+    align-items:flex-start;
+
+    gap:12px;
+
+    color:#DDBA95;
+
+    line-height:1.7;
+
+}
+
+.footer-contact-item i{
+
+    color:var(--primary-light);
+
+    margin-top:4px;
+
+}
+
+
+/* ----------------------------------------------------------
+   SOCIAL LINKS
+-----------------------------------------------------------*/
+
+.footer-social{
+
+    display:flex;
+
+    gap:14px;
+
+    margin-top:12px;
+
+}
+
+.footer-social a{
+
+    width:42px;
+
+    height:42px;
+
+    border-radius:50%;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    background:rgba(255,255,255,.08);
+
+    color:white;
+
+    transition:var(--transition);
+
+}
+
+.footer-social a:hover{
+
+    background:var(--primary-light);
+
+    transform:translateY(-3px);
+
+}
+
+
+/* ----------------------------------------------------------
+   NEWSLETTER
+-----------------------------------------------------------*/
+
+.footer-newsletter{
+
+    margin-top:18px;
+
+}
+
+.footer-newsletter form{
+
+    display:flex;
+
+    gap:10px;
+
+    margin-top:14px;
+
+}
+
+.footer-newsletter input{
+
+    flex:1;
+
+    padding:12px 14px;
+
+    border:none;
+
+    border-radius:var(--radius-md);
+
+}
+
+.footer-newsletter button{
+
+    border:none;
+
+    padding:12px 20px;
+
+    border-radius:var(--radius-md);
+
+    background:var(--primary-light);
+
+    color:white;
+
+    font-weight:600;
+
+    transition:var(--transition);
+
+}
+
+.footer-newsletter button:hover{
+
+    background:var(--primary);
+
+}
+
+
+/* ----------------------------------------------------------
+   FOOTER BOTTOM
+-----------------------------------------------------------*/
+
+.footer-bottom{
+
+    margin-top:50px;
+
+    padding-top:25px;
+
+    border-top:1px solid rgba(255,255,255,.12);
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:20px;
+
+    flex-wrap:wrap;
+
+}
+
+.footer-bottom p{
+
+    color:#DDBA95;
+
+}
+
+.footer-bottom-links{
+
+    display:flex;
+
+    gap:20px;
+
+    flex-wrap:wrap;
+
+}
+
+.footer-bottom-links a{
+
+    color:#DDBA95;
+
+    transition:var(--transition);
+
+}
+
+.footer-bottom-links a:hover{
+
+    color:white;
+
+}
+
+
+/* ----------------------------------------------------------
+   RESPONSIVE
+-----------------------------------------------------------*/
+
+@media(max-width:992px){
+
+.footer-grid{
+
+    grid-template-columns:
+
+        repeat(2,1fr);
+
+}
+
+}
+
+
+@media(max-width:768px){
+
+.footer-container{
+
+    padding:60px 18px 30px;
+
+}
+
+.footer-grid{
+
+    grid-template-columns:1fr;
+
+    gap:35px;
+
+}
+
+.footer-newsletter form{
+
+    flex-direction:column;
+
+}
+
+.footer-newsletter button{
+
+    width:100%;
+
+}
+
+.footer-bottom{
+
+    flex-direction:column;
+
+    text-align:center;
+
+}
+
+.footer-bottom-links{
+
+    justify-content:center;
+
+}
+
+.footer-description{
+
+    max-width:100%;
+
+}
+
+}
+
+
+@media(max-width:480px){
+
+.footer-logo img{
+
+    width:50px;
+
+    height:50px;
+
+}
+
+.footer-logo-title{
+
+    font-size:1.2rem;
+
+}
+
+.footer-social{
+
+    justify-content:flex-start;
+
+    flex-wrap:wrap;
+
+}
+
+}
