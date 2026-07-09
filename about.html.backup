@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Silk Spices | Silkpath Enterprise</title>
+    <meta name="description" content="Learn about Silk Spices, a brand of Silkpath Enterprise - bringing authentic Indian spices from our farms to your kitchen.">
+    <link rel="icon" href="images/logo.png">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, sans-serif; }
+        body { background: #FFF8F0; color: #333; line-height: 1.6; }
+        
+        /* Top Bar */
+        .top-bar {
+            background: #8B2500;
+            color: white;
+            padding: 8px 20px;
+            text-align: center;
+            font-size: 13px;
+        }
+        
+        /* Header */
+        header {
+            background: white;
+            padding: 15px 40px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        .logo { display: flex; align-items: center; gap: 12px; cursor: pointer; }
+        .logo img { width: 50px; }
+        .logo-text { color: #8B2500; font-size: 26px; font-weight: 800; line-height: 1; }
+        .logo-sub { font-size: 10px; color: #8B2500; letter-spacing: 2px; margin-top: 3px; }
+        nav ul { list-style: none; display: flex; gap: 25px; }
+        nav a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 600;
+            font-size: 15px;
+            transition: color 0.3s;
+            padding-bottom: 4px;
+            border-bottom: 2px solid transparent;
+        }
+        nav a:hover, nav a.active { color: #E85D25; border-bottom-color: #E85D25; }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #8B2500 0%, #E85D25 100%);
+            color: white;
+            padding: 100px 20px 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: "🌶️ 🌿 ⭐ 🍃 🥭 🌾";
+            position: absolute;
+            top: 20px; left: 0;
+            width: 100%;
+            font-size: 60px;
+            opacity: 0.08;
+            letter-spacing: 60px;
+            white-space: nowrap;
+        }
+        .hero h1 { font-size: 58px; margin-bottom: 20px; position: relative; z-index: 1; }
+        .hero p { font-size: 22px; opacity: 0.95; max-width: 800px; margin: 0 auto; position: relative; z-index: 1; line-height: 1.6; }
+        
+        /* Container */
+        .container { max-width: 1200px; margin: 0 auto; padding: 60px 20px; }
+        
+        /* Story Section */
+        .story-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            margin-bottom: 80px;
+        }
+        .story-section img {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(139,37,0,0.15);
+        }
+                .story-content h2 {
+            color: #8B2500;
+            font-size: 42px;
+            margin-bottom: 25px;
+        }
+        .story-content h2::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: #E85D25;
+            margin-top: 10px;
+            border-radius: 2px;
+        }
+        .story-content p { font-size: 18px; color: #444; margin-bottom: 18px; line-height: 1.8; }
+        .story-content strong { color: #8B2500; font-weight: 700; }
+        
+        /* Mission & Vision */
+        .mv-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 80px;
+        }
+        .mv-card {
+            background: white;
+            padding: 40px 35px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+            border-top: 5px solid #E85D25;
+            transition: transform 0.3s;
+        }
+        .mv-card:hover { transform: translateY(-8px); }
+        .mv-card .icon { font-size: 55px; margin-bottom: 15px; }
+        .mv-card h3 { color: #8B2500; font-size: 26px; margin-bottom: 15px; }
+        .mv-card p { color: #666; font-size: 16px; }
+        
+        /* Section Title */
+        .section-title {
+            text-align: center;
+            font-size: 36px;
+            color: #8B2500;
+            margin-bottom: 10px;
+        }
+        .section-subtitle {
+            text-align: center;
+            color: #888;
+            margin-bottom: 40px;
+            font-size: 16px;
+        }
+        
+        /* Values Grid */
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 25px;
+            margin-bottom: 80px;
+        }
+        .value-card {
+            background: white;
+            padding: 35px 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.06);
+            text-align: center;
+            transition: all 0.3s;
+        }
+        .value-card:hover { 
+            transform: translateY(-5px); 
+            box-shadow: 0 15px 35px rgba(232,93,37,0.15);
+        }
+        .value-card .icon { font-size: 55px; margin-bottom: 15px; }
+        .value-card h3 { color: #8B2500; margin-bottom: 10px; font-size: 20px; }
+        .value-card p { color: #666; font-size: 14px; }
+        /* Certifications Section */
+.certifications-section {
+    background: linear-gradient(135deg, #EEF7FF 0%, #E3F2FD 100%);
+    padding: 60px 40px;
+    border-radius: 20px;
+    margin-bottom: 80px;
+}
+.cert-title { text-align: center; color: #1a5490; margin-bottom: 10px; font-size: 36px; }
+.cert-subtitle { text-align: center; color: #555; margin-bottom: 40px; font-size: 16px; }
+.cert-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+.cert-card {
+    background: white;
+    padding: 30px 25px;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+    text-align: center;
+    transition: all 0.3s;
+}
+.cert-card:hover { transform: translateY(-5px); box-shadow: 0 15px 35px rgba(26,84,144,0.15); }
+.cert-logo {
+    width: 100%;
+    height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    padding: 15px;
+}
+.cert-logo img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+.cert-card h3 {
+    color: #1a5490;
+    margin-bottom: 15px;
+    font-size: 20px;
+    min-height: 55px;
+}
+.cert-card p {
+    color: #555;
+    font-size: 14px;
+    font-style: italic;
+    line-height: 1.6;
+}
+        /* Stats Section */
+        .stats-section {
+            background: linear-gradient(135deg, #8B2500 0%, #E85D25 100%);
+            color: white;
+            padding: 60px 20px;
+            border-radius: 20px;
+            margin-bottom: 80px;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 30px;
+            text-align: center;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .stat-item .number { font-size: 48px; font-weight: 800; margin-bottom: 5px; }
+        .stat-item .label { font-size: 15px; opacity: 0.9; }
+        
+        /* Journey Timeline */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto 80px;
+            padding: 20px 0;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: #E85D25;
+            transform: translateX(-50%);
+        }
+        .timeline-item {
+            display: flex;
+            justify-content: flex-end;
+            padding-right: 50%;
+            position: relative;
+            margin-bottom: 40px;
+        }
+        .timeline-item:nth-child(even) {
+            justify-content: flex-start;
+            padding-right: 0;
+            padding-left: 50%;
+        }
+        .timeline-content {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            max-width: 350px;
+            margin: 0 30px;
+            position: relative;
+        }
+        .timeline-content::before {
+            content: '';
+            position: absolute;
+            top: 25px;
+            width: 15px;
+            height: 15px;
+            background: #E85D25;
+            border-radius: 50%;
+            border: 4px solid white;
+            box-shadow: 0 0 0 2px #E85D25;
+        }
+        .timeline-item:nth-child(odd) .timeline-content::before { right: -37px; }
+        .timeline-item:nth-child(even) .timeline-content::before { left: -37px; }
+        .timeline-content .year { color: #E85D25; font-weight: 700; font-size: 18px; margin-bottom: 5px; }
+        .timeline-content h4 { color: #8B2500; margin-bottom: 8px; font-size: 18px; }
+        .timeline-content p { color: #666; font-size: 14px; }
+        
+        /* CTA Section */
+        .cta-section {
+            background: white;
+            padding: 60px 40px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            margin-bottom: 40px;
+        }
+        .cta-section h2 { color: #8B2500; font-size: 32px; margin-bottom: 15px; }
+        .cta-section p { color: #666; font-size: 17px; margin-bottom: 30px; }
+        .cta-buttons { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; }
+        .btn {
+            display: inline-block;
+            padding: 14px 32px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 15px;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: none;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #E85D25, #8B2500);
+            color: white;
+        }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(232,93,37,0.4); }
+        .btn-secondary {
+            background: white;
+            color: #8B2500;
+            border: 2px solid #8B2500;
+        }
+        .btn-secondary:hover { background: #8B2500; color: white; }
+        
+        /* Footer */
+        footer {
+            background: #2C1810;
+            color: #E4B7A0;
+            padding: 40px 20px 20px;
+            margin-top: 60px;
+        }
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        .footer-col h4 { color: white; margin-bottom: 15px; font-size: 16px; }
+        .footer-col a { color: #E4B7A0; text-decoration: none; display: block; margin-bottom: 8px; font-size: 14px; transition: color 0.3s; }
+        .footer-col a:hover { color: #E85D25; }
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #4A2820;
+            font-size: 14px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 36px; }
+            .hero p { font-size: 16px; }
+            .story-section { grid-template-columns: 1fr; gap: 30px; }
+            .mv-grid { grid-template-columns: 1fr; }
+            .timeline::before { left: 20px; }
+            .timeline-item, .timeline-item:nth-child(even) {
+                justify-content: flex-start;
+                padding: 0 0 0 50px;
+            }
+            .timeline-content { margin: 0; }
+            .timeline-item:nth-child(odd) .timeline-content::before,
+            .timeline-item:nth-child(even) .timeline-content::before { left: -37px; right: auto; }
+            nav ul { gap: 15px; font-size: 13px; }
+            header { padding: 15px 20px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Bar -->
+    <div class="top-bar">
+        🚚 Free Shipping on Orders Above ₹499 | 📞 Call: +91-7573951513
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="logo" onclick="location.href='index.html'">
+            <img src="images/logo.png" alt="Silk Spices">
+            <div>
+                <div class="logo-text">Silk Spices</div>
+                <div class="logo-sub">SILKPATH ENTERPRISE</div>
+            </div>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#shop">Shop</a></li>
+                <li><a href="about.html" class="active">About</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Our Story</h1>
+        <p>From the fertile fields of India to your kitchen shelf — bringing you nature's finest spices with love, tradition, and uncompromised quality.</p>
+    </section>
+
+    <div class="container">
+        
+        <!-- Story Section -->
+        <div class="story-section">
+            <div class="story-content">
+                <h2>Who We Are</h2>
+                <p><strong>Silk Spices</strong> is a proud brand of <strong>Silkpath Enterprise</strong>, dedicated to preserving the authentic flavors of Indian cuisine through pure, high-quality spices.</p>
+                <p>Our journey began with a simple belief: that every meal deserves the finest ingredients. From the vibrant turmeric fields of Erode to the aromatic cardamom estates of Kerala, we source directly from farmers who share our passion for quality.</p>
+                <p>Every spice in our collection is carefully selected, hygienically processed, and packaged with modern technology to lock in freshness and flavor — bringing you the true taste of India in every pinch.</p>
+            </div>
+            <div>
+                <img src="images/logo.png" alt="Silk Spices" style="max-width:400px;margin:0 auto;display:block;background:linear-gradient(135deg,#FFF8F0,#F5E6D3);padding:40px;">
+            </div>
+        </div>
+
+        <!-- Mission & Vision -->
+        <div class="mv-grid">
+            <div class="mv-card">
+                <div class="icon">🎯</div>
+                <h3>Our Mission</h3>
+                <p>To deliver 100% pure, unadulterated spices that transform everyday cooking into an authentic Indian culinary experience. We are committed to quality, sustainability, and empowering the farming communities that make it all possible.</p>
+            </div>
+            <div class="mv-card">
+                <div class="icon">👁️</div>
+                <h3>Our Vision</h3>
+                <p>To become India's most trusted spice brand, taking the rich flavors of our heritage to every kitchen — locally and globally — while maintaining the highest standards of purity, safety, and traditional quality.</p>
+            </div>
+        </div>
+
+        <!-- Why Choose Us -->
+        <h2 class="section-title">Why Choose Silk Spices?</h2>
+        <p class="section-subtitle">Quality, purity, and tradition in every pack</p>
+        <div class="values-grid">
+            <div class="value-card">
+                <div class="icon">🌿</div>
+                <h3>100% Natural</h3>
+                <p>No preservatives, no artificial colors, no additives — just pure spices as nature intended.</p>
+            </div>
+            <div class="value-card">
+                <div class="icon">🏭</div>
+                <h3>Factory Sealed</h3>
+                <p>Modern packaging technology preserves freshness, aroma, and flavor from our facility to your kitchen.</p>
+            </div>
+            <div class="value-card">
+                <div class="icon">✅</div>
+                <h3>FSSAI Certified</h3>
+                <p>Fully compliant with Indian food safety standards. Every batch tested for quality and purity.</p>
+            </div>
+            <div class="value-card">
+                <div class="icon">🚚</div>
+                <h3>Fast Delivery</h3>
+                <p>Quick, reliable shipping across India. Free delivery on orders above ₹499.</p>
+            </div>
+            <div class="value-card">
+                <div class="icon">🌾</div>
+                <h3>Farm Fresh</h3>
+                <p>Sourced directly from trusted farmers, ensuring authenticity and supporting agricultural communities.</p>
+            </div>
+            <div class="value-card">
+                <div 

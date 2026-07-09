@@ -1,0 +1,1013 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart - Silk Spices</title>
+    <link rel="icon" href="images/logo.png">
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, sans-serif; }
+        body { background: #FFF8F0; color: #333; line-height: 1.6; }
+        
+        .top-bar { background: #8B2500; color: white; padding: 8px 20px; text-align: center; font-size: 13px; }
+        header { background: white; padding: 15px 40px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; flex-wrap: wrap; gap: 15px; }
+        .logo { display: flex; align-items: center; gap: 12px; cursor: pointer; }
+        .logo img { width: 50px; }
+        .logo-text { color: #8B2500; font-size: 26px; font-weight: 800; line-height: 1; }
+        .logo-sub { font-size: 10px; color: #8B2500; letter-spacing: 2px; margin-top: 3px; }
+        nav ul { list-style: none; display: flex; gap: 25px; align-items: center; }
+        nav a { text-decoration: none; color: #333; font-weight: 600; font-size: 15px; transition: color 0.3s; padding-bottom: 4px; border-bottom: 2px solid transparent; }
+        nav a:hover, nav a.active { color: #E85D25; border-bottom-color: #E85D25; }
+        
+        .page-header { background: linear-gradient(135deg, #8B2500 0%, #E85D25 100%); color: white; padding: 40px 20px; text-align: center; }
+        .page-header h1 { font-size: 36px; margin-bottom: 5px; }
+        .breadcrumb { font-size: 14px; opacity: 0.9; }
+        .breadcrumb a { color: white; text-decoration: none; }
+        .breadcrumb a:hover { text-decoration: underline; }
+        
+        .cart-container { max-width: 1300px; margin: 40px auto; padding: 0 20px; display: grid; grid-template-columns: 1fr 380px; gap: 30px; }
+        
+        .cart-items-section { background: white; border-radius: 15px; padding: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        .cart-items-header { display: flex; justify-content: space-between; align-items: center; padding-bottom: 20px; border-bottom: 2px solid #F5E6D3; margin-bottom: 20px; }
+        .cart-items-header h2 { color: #8B2500; font-size: 24px; }
+        .item-count { color: #666; font-size: 14px; background: #FFF8F0; padding: 5px 12px; border-radius: 15px; }
+        
+        .cart-item { display: grid; grid-template-columns: 100px 1fr auto; gap: 20px; padding: 20px 0; border-bottom: 1px solid #F5E6D3; align-items: center; }
+        .cart-item:last-child { border-bottom: none; }
+        .item-image { width: 100px; height: 100px; background: #FFF8F0; border-radius: 10px; display: flex; align-items: center; justify-content: center; overflow: hidden; font-size: 50px; }
+        .item-image img { max-width: 100%; max-height: 100%; object-fit: contain; }
+        
+        .item-details h3 { color: #8B2500; font-size: 17px; margin-bottom: 5px; cursor: pointer; }
+        .item-details h3:hover { color: #E85D25; }
+        .item-weight { color: #666; font-size: 13px; margin-bottom: 8px; }
+        .item-weight-badge { background: #F5E6D3; color: #8B2500; padding: 3px 10px; border-radius: 10px; font-size: 12px; font-weight: 600; display: inline-block; }
+        .item-price { color: #E85D25; font-weight: 700; font-size: 16px; margin-top: 5px; }
+        
+        .item-controls { display: flex; flex-direction: column; align-items: flex-end; gap: 10px; }
+        .qty-control { display: flex; align-items: center; gap: 5px; background: #FFF8F0; border-radius: 25px; padding: 5px; }
+        .qty-btn { width: 30px; height: 30px; border: none; background: white; color: #8B2500; font-size: 18px; font-weight: 700; border-radius: 50%; cursor: pointer; transition: all 0.3s; display: flex; align-items: center; justify-content: center; }
+        .qty-btn:hover { background: #E85D25; color: white; }
+        .qty-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+        .qty-value { min-width: 30px; text-align: center; font-weight: 700; color: #8B2500; }
+        .remove-btn { background: none; border: none; color: #d32f2f; font-size: 13px; cursor: pointer; padding: 5px 10px; border-radius: 15px; transition: background 0.3s; }
+        .remove-btn:hover { background: #FFEBEE; }
+        .item-subtotal { color: #8B2500; font-weight: 700; font-size: 18px; }
+        
+        .summary-section { position: sticky; top: 100px; align-self: start; }
+        .summary-card { background: white; border-radius: 15px; padding: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); margin-bottom: 20px; }
+        .summary-card h2 { color: #8B2500; font-size: 22px; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 2px solid #F5E6D3; }
+        .summary-row { display: flex; justify-content: space-between; margin-bottom: 12px; font-size: 15px; color: #555; }
+        .summary-row.total { font-size: 20px; font-weight: 700; color: #8B2500; padding-top: 15px; border-top: 2px solid #F5E6D3; margin-top: 15px; }
+		.summary-row.gst-row {
+    color: #666;
+    font-size: 13px;
+    padding-left: 15px;
+}
+        .free-shipping-badge { background: #E8F5E9; color: #2E7D32; padding: 10px; border-radius: 8px; text-align: center; font-size: 13px; margin: 15px 0; font-weight: 600; }
+        .free-shipping-badge.pending { background: #FFF3E0; color: #E65100; }
+        
+        .checkout-btn { width: 100%; padding: 15px; background: linear-gradient(135deg, #E85D25, #8B2500); color: white; border: none; border-radius: 30px; font-size: 16px; font-weight: 700; cursor: pointer; transition: all 0.3s; margin-top: 10px; }
+        .checkout-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(232,93,37,0.4); }
+        .checkout-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .continue-btn { width: 100%; padding: 12px; background: white; color: #8B2500; border: 2px solid #8B2500; border-radius: 30px; font-size: 15px; font-weight: 600; cursor: pointer; text-decoration: none; display: block; text-align: center; transition: all 0.3s; margin-top: 10px; }
+        .continue-btn:hover { background: #8B2500; color: white; }
+        
+        .empty-cart { text-align: center; padding: 80px 20px; }
+        .empty-cart .icon { font-size: 100px; margin-bottom: 20px; opacity: 0.5; }
+        .empty-cart h2 { color: #8B2500; font-size: 28px; margin-bottom: 10px; }
+        .empty-cart p { color: #666; margin-bottom: 25px; font-size: 16px; }
+        .empty-cart .continue-btn { max-width: 300px; margin: 0 auto; }
+        
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 1000; justify-content: center; align-items: center; padding: 20px; overflow-y: auto; }
+        .modal-overlay.active { display: flex; }
+        .modal { background: white; border-radius: 15px; padding: 30px; max-width: 550px; width: 100%; max-height: 90vh; overflow-y: auto; }
+        .modal h2 { color: #8B2500; margin-bottom: 20px; font-size: 24px; }
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; margin-bottom: 5px; color: #555; font-weight: 600; font-size: 14px; }
+        .form-group input, .form-group textarea, .form-group select { width: 100%; padding: 12px; border: 2px solid #F5E6D3; border-radius: 8px; font-size: 14px; font-family: inherit; transition: border 0.3s; }
+        .form-group input:focus, .form-group textarea:focus, .form-group select:focus { outline: none; border-color: #E85D25; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .modal-actions { display: flex; gap: 10px; margin-top: 20px; }
+        .modal-btn { flex: 1; padding: 12px; border: none; border-radius: 25px; font-size: 15px; font-weight: 600; cursor: pointer; transition: all 0.3s; }
+        .modal-btn.primary { background: linear-gradient(135deg, #E85D25, #8B2500); color: white; }
+        .modal-btn.primary:hover { transform: translateY(-2px); }
+        .modal-btn.secondary { background: white; color: #666; border: 2px solid #ddd; }
+        
+        .upi-modal { max-width: 500px; text-align: center; }
+        .upi-header { text-align: center; margin-bottom: 20px; }
+        .upi-header h2 { color: #8B2500; font-size: 26px; margin-bottom: 5px; }
+        .upi-header p { color: #666; font-size: 14px; }
+        
+        .upi-amount-box { background: linear-gradient(135deg, #E85D25, #8B2500); color: white; padding: 20px; border-radius: 12px; margin: 15px 0; }
+        .upi-amount-label { font-size: 13px; opacity: 0.9; margin-bottom: 5px; }
+        .upi-amount { font-size: 36px; font-weight: 800; line-height: 1; }
+        .upi-order-id { font-size: 12px; opacity: 0.85; margin-top: 8px; }
+        
+        .upi-timer { background: #FFF3E0; color: #E65100; padding: 10px; border-radius: 8px; font-weight: 600; font-size: 14px; margin: 15px 0; }
+        .upi-timer.warning { background: #FFEBEE; color: #C62828; animation: pulse 1s infinite; }
+        @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.6; } }
+        
+        .qr-container { background: white; border: 3px solid #E85D25; border-radius: 15px; padding: 20px; margin: 20px auto; display: inline-block; box-shadow: 0 4px 15px rgba(232,93,37,0.2); }
+        #qrcode canvas, #qrcode img { display: block; margin: 0 auto; }
+        
+        .upi-instruction { background: #FFF8F0; padding: 12px; border-radius: 8px; font-size: 13px; color: #666; margin: 15px 0; }
+        
+        .upi-id-box { background: #F5F5F5; border: 2px dashed #8B2500; border-radius: 10px; padding: 15px; margin: 15px 0; display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+        .upi-id-text { font-family: monospace; font-size: 16px; font-weight: 700; color: #8B2500; }
+        .copy-btn { background: #8B2500; color: white; border: none; padding: 8px 15px; border-radius: 20px; cursor: pointer; font-size: 12px; font-weight: 600; transition: all 0.3s; }
+        .copy-btn:hover { background: #E85D25; }
+        .copy-btn.copied { background: #4CAF50; }
+        
+        /* ===== IMPROVED UPI APPS - HORIZONTAL LAYOUT ===== */
+.upi-apps { 
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 12px;
+    margin: 20px 0 8px;
+    padding: 15px;
+    background: #FFF8F0;
+    border-radius: 12px;
+}
+
+.upi-app-btn { 
+    flex: 1;
+    max-width: 80px;
+    aspect-ratio: 1;
+    background: white; 
+    border: 2px solid #F5E6D3;
+    border-radius: 12px;
+    cursor: pointer; 
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.upi-app-btn:hover { 
+    border-color: #E85D25;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(232, 93, 37, 0.2);
+    background: #FFF8F0;
+}
+
+.upi-app-btn:active {
+    transform: translateY(-1px);
+}
+
+.upi-app-logo { 
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+.upi-app-btn:hover .upi-app-logo {
+    transform: scale(1.15);
+}
+
+.upi-fallback {
+    width: 100%;
+    height: 24px;
+    border-radius: 6px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    line-height: 24px;
+}
+
+/* App name labels below icons */
+.upi-apps-labels {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 12px;
+    padding: 0 15px;
+    margin-bottom: 15px;
+}
+
+.upi-apps-labels span {
+    flex: 1;
+    max-width: 80px;
+    text-align: center;
+    font-size: 10px;
+    color: #666;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+}
+
+/* Mobile responsive */
+@media (max-width: 600px) {
+    .upi-apps {
+        padding: 12px 10px;
+        gap: 8px;
+    }
+    .upi-app-btn {
+        max-width: 65px;
+        padding: 8px;
+    }
+    .upi-apps-labels {
+        padding: 0 10px;
+        gap: 8px;
+    }
+    .upi-apps-labels span {
+        max-width: 65px;
+        font-size: 9px;
+    }
+}
+        
+        .upi-divider { text-align: center; color: #999; font-size: 12px; margin: 20px 0; position: relative; }
+        .upi-divider::before, .upi-divider::after { content: ''; position: absolute; top: 50%; width: 40%; height: 1px; background: #ddd; }
+        .upi-divider::before { left: 0; }
+        .upi-divider::after { right: 0; }
+        
+        .paid-btn { background: linear-gradient(135deg, #4CAF50, #2E7D32); color: white; border: none; width: 100%; padding: 15px; border-radius: 12px; font-size: 16px; font-weight: 700; cursor: pointer; margin-top: 15px; transition: all 0.3s; }
+        .paid-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 15px rgba(76,175,80,0.4); }
+        .paid-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        
+        .cancel-btn { background: white; color: #666; border: 2px solid #ddd; width: 100%; padding: 12px; border-radius: 12px; font-size: 14px; font-weight: 600; cursor: pointer; margin-top: 10px; }
+        
+        .payment-note { background: #E3F2FD; border-left: 4px solid #1976D2; padding: 12px; border-radius: 8px; font-size: 12px; color: #1565C0; margin: 15px 0; text-align: left; }
+        
+        .success-modal { text-align: center; padding: 40px 30px; }
+        .success-modal .icon { font-size: 80px; margin-bottom: 20px; }
+        .success-modal h2 { color: #2E7D32; margin-bottom: 10px; }
+        .success-modal p { color: #666; margin-bottom: 20px; }
+        .order-id { background: #FFF8F0; padding: 15px; border-radius: 10px; font-family: monospace; color: #8B2500; font-weight: 700; margin: 15px 0; font-size: 18px; }
+        
+        footer { background: #3a2817; color: #fff; padding: 40px 20px 20px; margin-top: 60px; }
+        .footer-content { max-width: 1300px; margin: auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; }
+        .footer-col h3 { color: #D2691E; margin-bottom: 15px; font-size: 16px; }
+        .footer-col p, .footer-col a { color: #c9b8a5; font-size: 14px; text-decoration: none; display: block; margin-bottom: 8px; }
+        .footer-col a:hover { color: #D2691E; }
+        .footer-bottom { text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #5a4a37; color: #c9b8a5; font-size: 13px; }
+        
+        .loader { text-align: center; padding: 60px; color: #666; font-size: 18px; }
+        
+        @media (max-width: 900px) {
+            .cart-container { grid-template-columns: 1fr; }
+            .summary-section { position: static; }
+        }
+        @media (max-width: 600px) {
+            .cart-item { grid-template-columns: 80px 1fr; gap: 15px; }
+            .item-image { width: 80px; height: 80px; }
+            .item-controls { grid-column: 1 / -1; flex-direction: row; justify-content: space-between; align-items: center; }
+            nav ul { gap: 12px; font-size: 13px; }
+            header { padding: 15px 20px; }
+            .form-row { grid-template-columns: 1fr; }
+            .upi-apps { grid-template-columns: 1fr 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="top-bar">🚚 Free Shipping(Only In Gujarat) on Orders Above ₹999 | 📞 Call: +91-7573951513</div>
+    
+    <header>
+        <div class="logo" onclick="location.href='index.html'">
+            <img src="images/logo.png" alt="Silk Spices">
+            <div>
+                <div class="logo-text">Silk Spices</div>
+                <div class="logo-sub">SILKPATH ENTERPRISE</div>
+            </div>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#shop">Shop</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+                <li><a href="cart.html" class="active">🛒 Cart (<span id="navCartCount">0</span>)</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="page-header">
+        <h1>🛒 Your Shopping Cart</h1>
+        <div class="breadcrumb">
+            <a href="index.html">Home</a> / <a href="index.html#shop">Shop</a> / Cart
+        </div>
+    </div>
+
+    <div id="cartContent">
+        <div class="loader">🌶️ Loading your cart...</div>
+    </div>
+
+    <!-- Checkout Modal -->
+    <div class="modal-overlay" id="checkoutModal">
+        <div class="modal">
+            <h2>📦 Complete Your Order</h2>
+            <form id="checkoutForm">
+                <div class="form-group">
+                    <label>Full Name *</label>
+                    <input type="text" id="custName" required placeholder="John Doe">
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Phone *</label>
+                        <input type="tel" id="custPhone" required placeholder="9876543210" pattern="[0-9]{10}" maxlength="10">
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" id="custEmail" placeholder="you@example.com">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Complete Address *</label>
+                    <textarea id="custAddress" required rows="3" placeholder="House No, Street, Area"></textarea>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>City *</label>
+                        <input type="text" id="custCity" required placeholder="Vadodara">
+                    </div>
+                    <div class="form-group">
+                        <label>Pincode *</label>
+                        <input type="text" id="custPincode" required placeholder="390024" pattern="[0-9]{6}" maxlength="6">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Payment Method *</label>
+                    <select id="paymentMethod" required>
+                        <option value="UPI">💚 UPI (Pay Now) - Instant</option>
+                        <option value="COD">💵 Cash on Delivery</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Order Notes (Optional)</label>
+                    <textarea id="orderNotes" rows="2" placeholder="Any special instructions..."></textarea>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="modal-btn secondary" onclick="closeCheckout()">Cancel</button>
+                    <button type="submit" class="modal-btn primary" id="placeOrderBtn">Continue →</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- UPI Payment Modal -->
+    <div class="modal-overlay" id="upiPaymentModal">
+        <div class="modal upi-modal">
+            <div class="upi-header">
+                <h2>💳 Pay via UPI</h2>
+                <p>Scan QR or click your UPI app below</p>
+            </div>
+            
+            <div class="upi-amount-box">
+                <div class="upi-amount-label">Amount to Pay</div>
+                <div class="upi-amount">₹<span id="upiAmount">0</span></div>
+                <div class="upi-order-id">Order ID: <span id="upiOrderId">SS-XXXXX</span></div>
+            </div>
+            
+            <div class="upi-timer" id="upiTimer">
+                ⏱️ Payment window: <span id="timerDisplay">05:00</span>
+            </div>
+            
+            <div class="qr-container">
+                <div id="qrcode"></div>
+            </div>
+            
+            <div class="upi-instruction">
+                📱 Scan with any UPI app - Amount is pre-filled
+            </div>
+            
+            <div class="upi-divider">OR</div>
+            
+            <div style="font-size:13px;color:#666;margin-bottom:8px;">Pay to UPI ID:</div>
+            <div class="upi-id-box">
+                <span class="upi-id-text">7573951513@UPI</span>
+                <button class="copy-btn" id="copyUpiBtn" onclick="copyUpiId()">📋 Copy</button>
+            </div>
+            
+            <div class="upi-divider">OR OPEN UPI APP</div>
+            
+            <div class="upi-apps">
+    <a href="#" class="upi-app-btn" id="gpayBtn" title="Google Pay">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/f/f2/Google_Pay_Logo.svg" 
+             alt="GPay" class="upi-app-logo"
+             onerror="this.style.display='none';this.parentElement.querySelector('.upi-fallback').style.display='flex';">
+        <div class="upi-fallback" style="display:none;background:#4285F4;color:white;font-weight:800;font-size:11px;">GPay</div>
+    </a>
+    
+    <a href="#" class="upi-app-btn" id="phonepeBtn" title="PhonePe">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/7/71/PhonePe_Logo.svg" 
+             alt="PhonePe" class="upi-app-logo"
+             onerror="this.style.display='none';this.parentElement.querySelector('.upi-fallback').style.display='flex';">
+        <div class="upi-fallback" style="display:none;background:#5F259F;color:white;font-weight:800;font-size:10px;">PhonePe</div>
+    </a>
+    
+    <a href="#" class="upi-app-btn" id="paytmBtn" title="Paytm">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/2/24/Paytm_Logo_%28standalone%29.svg" 
+             alt="Paytm" class="upi-app-logo"
+             onerror="this.style.display='none';this.parentElement.querySelector('.upi-fallback').style.display='flex';">
+        <div class="upi-fallback" style="display:none;background:#00BAF2;color:white;font-weight:800;font-size:11px;">Paytm</div>
+    </a>
+    
+    <a href="#" class="upi-app-btn" id="bhimBtn" title="BHIM UPI">
+        <img src="https://www.bhimupi.org.in/sites/default/files/2022-06/BHIM%20Logo.png" 
+             alt="BHIM" class="upi-app-logo"
+             onerror="this.style.display='none';this.parentElement.querySelector('.upi-fallback').style.display='flex';">
+        <div class="upi-fallback" style="display:none;background:#FF7722;color:white;font-weight:800;font-size:11px;">BHIM</div>
+    </a>
+</div>
+
+<!-- ✅ NEW: App name labels below icons -->
+<div class="upi-apps-labels">
+    <span>Google Pay</span>
+    <span>PhonePe</span>
+    <span>Paytm</span>
+    <span>BHIM</span>
+</div>
+<div style="display:flex;justify-content:center;align-items:center;gap:15px;margin:20px 0;padding:12px;background:#F1F8E9;border-radius:8px;">
+    <div style="display:flex;align-items:center;gap:5px;font-size:11px;color:#2E7D32;font-weight:600;">
+        🔒 SECURE
+    </div>
+    <div style="width:1px;height:20px;background:#c8e6c9;"></div>
+    <div style="display:flex;align-items:center;gap:5px;font-size:11px;color:#2E7D32;font-weight:600;">
+        ⚡ INSTANT
+    </div>
+    <div style="width:1px;height:20px;background:#c8e6c9;"></div>
+    <div style="display:flex;align-items:center;gap:5px;font-size:11px;color:#2E7D32;font-weight:600;">
+        ✅ VERIFIED
+    </div>
+</div>
+            
+            <div class="payment-note">
+                <strong>ℹ️ Important:</strong> After completing payment, click the button below. We'll verify and confirm your order within 30 minutes.
+            </div>
+            
+            <button class="paid-btn" id="paidBtn" onclick="confirmPayment()">
+                ✅ I have paid ₹<span id="paidAmount">0</span>
+            </button>
+            <button class="cancel-btn" onclick="cancelUpiPayment()">Cancel Payment</button>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div class="modal-overlay" id="successModal">
+        <div class="modal success-modal">
+            <div class="icon" id="successIcon">✅</div>
+            <h2 id="successTitle">Order Placed Successfully!</h2>
+            <p id="successMessage">Thank you for shopping with Silk Spices!</p>
+            <div class="order-id" id="orderIdDisplay">Order ID: SS-XXXXX</div>
+            <p id="paymentStatusMsg" style="font-size:14px;color:#2E7D32;font-weight:600;"></p>
+            <p>We'll contact you shortly on <strong id="orderPhoneDisplay"></strong> to confirm your order.</p>
+            <p style="font-size:13px;color:#888;">Estimated delivery: 3-5 business days</p>
+            <button class="modal-btn primary" style="width:100%;margin-top:20px;" onclick="closeSuccessAndGoHome()">Continue Shopping</button>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-col">
+                <h3>Silk Spices</h3>
+                <a href="index.html">Home</a>
+                <a href="index.html#shop">Shop</a>
+                <a href="about.html">About Us</a>
+                <a href="cart.html">Cart</a>
+            </div>
+            <div class="footer-col">
+                <h3>Customer Care</h3>
+                <a href="#">Shipping Policy</a>
+                <a href="#">Return Policy</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms & Conditions</a>
+            </div>
+            <div class="footer-col">
+                <h3>Contact</h3>
+                <a href="mailto:info@silkspices.com">📧 info@silkspices.com</a>
+                <a href="tel:+917573951513">📞 +91-7573951513</a>
+                <a href="#">📍 Vadodara, Gujarat, India</a>
+            </div>
+            <div class="footer-col">
+                <h3>Follow Us</h3>
+                <a href="#">📘 Facebook</a>
+                <a href="#">📸 Instagram</a>
+                <a href="#">🐦 Twitter</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2026 Silk Spices | A Brand of Silkpath Enterprise. All rights reserved.
+        </div>
+    </footer>
+
+    <script type="module">
+        import { saveOrder, fetchProducts } from './firebase-config.js';
+
+        const UPI_CONFIG = {
+    id: '7573951513@UPI',
+    name: 'Silkpath Enterprise',
+    merchantCode: 'SILKSPICES'
+};
+
+// ✅ GST Configuration (5% for branded packaged spices)
+const GST_RATE = 0.05; // 5%
+const GST_INCLUSIVE = false; // Set to true if prices already include GST
+const SHIPPING_THRESHOLD = 999;
+const SHIPPING_CHARGE = 50;
+        let allProducts = [];
+        let cart = [];
+        let currentOrderData = null;
+        let paymentTimerInterval = null;
+        let currentOrderId = null;
+
+        function loadCart() {
+            cart = JSON.parse(localStorage.getItem('silkspices_cart') || '[]');
+            updateNavCount();
+        }
+
+        function saveCart() {
+            localStorage.setItem('silkspices_cart', JSON.stringify(cart));
+            updateNavCount();
+        }
+
+        function updateNavCount() {
+            const count = cart.reduce((sum, item) => sum + item.qty, 0);
+            document.getElementById('navCartCount').textContent = count;
+        }
+
+        async function init() {
+            loadCart();
+            try {
+                allProducts = await fetchProducts();
+            } catch(e) {
+                console.error('Failed to load products:', e);
+            }
+            renderCart();
+        }
+
+        function getProductInfo(productId) {
+            return allProducts.find(p => p.id === productId) || {};
+        }
+
+        function renderCart() {
+            const container = document.getElementById('cartContent');
+            
+            if (cart.length === 0) {
+                container.innerHTML = `
+                    <div class="cart-container" style="grid-template-columns:1fr;">
+                        <div class="cart-items-section">
+                            <div class="empty-cart">
+                                <div class="icon">🛒</div>
+                                <h2>Your cart is empty!</h2>
+                                <p>Add some delicious spices to get started</p>
+                                <a href="index.html#shop" class="continue-btn">🌶️ Browse Spices</a>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                return;
+            }
+
+            let subtotal = 0;
+cart.forEach(item => {
+    subtotal += item.price * item.qty;
+});
+
+// ✅ GST Calculation
+let itemsSubtotal, gstAmount, cgst, sgst;
+if (GST_INCLUSIVE) {
+    // Prices include GST - extract it
+    itemsSubtotal = Math.round(subtotal / (1 + GST_RATE));
+    gstAmount = subtotal - itemsSubtotal;
+} else {
+    // GST added on top
+    itemsSubtotal = subtotal;
+    gstAmount = Math.round(subtotal * GST_RATE);
+}
+cgst = Math.round(gstAmount / 2); // CGST = 2.5%
+sgst = gstAmount - cgst;            // SGST = 2.5%
+
+const shipping = subtotal >= SHIPPING_THRESHOLD ? 0 : SHIPPING_CHARGE;
+const total = GST_INCLUSIVE ? subtotal + shipping : subtotal + gstAmount + shipping;
+const remainingForFreeShip = SHIPPING_THRESHOLD - subtotal;
+
+            const itemsHTML = cart.map((item, index) => {
+                const product = getProductInfo(item.id);
+                const imageHTML = product.images?.packaged 
+                    ? `<img src="${product.images.packaged}" alt="${item.name}" onerror="this.style.display='none'; this.parentElement.innerHTML='${item.emoji || '🌶️'}';">`
+                    : (item.emoji || '🌶️');
+                
+                return `
+                    <div class="cart-item">
+                        <div class="item-image">${imageHTML}</div>
+                        <div class="item-details">
+                            <h3 onclick="location.href='product.html?id=${item.id}'">${item.name}</h3>
+                            <div class="item-weight">
+                                <span class="item-weight-badge">${item.weight}</span>
+                            </div>
+                            <div class="item-price">₹${item.price} × ${item.qty} = ₹${item.price * item.qty}</div>
+                        </div>
+                        <div class="item-controls">
+                            <div class="qty-control">
+                                <button class="qty-btn" onclick="updateQty(${index}, -1)" ${item.qty <= 1 ? 'disabled' : ''}>−</button>
+                                <span class="qty-value">${item.qty}</span>
+                                <button class="qty-btn" onclick="updateQty(${index}, 1)">+</button>
+                            </div>
+                            <div class="item-subtotal">₹${item.price * item.qty}</div>
+                            <button class="remove-btn" onclick="removeItem(${index})">🗑️ Remove</button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            const shippingBadge = subtotal >= SHIPPING_THRESHOLD
+                ? `<div class="free-shipping-badge">🎉 You've qualified for FREE shipping!</div>`
+                : `<div class="free-shipping-badge pending">🚚 Add ₹${remainingForFreeShip} more for FREE shipping</div>`;
+
+            container.innerHTML = `
+                <div class="cart-container">
+                    <div class="cart-items-section">
+                        <div class="cart-items-header">
+                            <h2>Cart Items</h2>
+                            <span class="item-count">${cart.length} item${cart.length > 1 ? 's' : ''}</span>
+                        </div>
+                        ${itemsHTML}
+                    </div>
+                    
+                    <div class="summary-section">
+                        <div class="summary-card">
+    <h2>💰 Order Summary</h2>
+    <div class="summary-row">
+        <span>Subtotal (${cart.reduce((s,i) => s+i.qty, 0)} items)</span>
+        <span>₹${itemsSubtotal}</span>
+    </div>
+    <div class="summary-row gst-row">
+        <span>
+            <span style="display:flex;align-items:center;gap:5px;">
+                CGST (2.5%)
+                <span title="Central GST" style="font-size:10px;color:#999;cursor:help;">ⓘ</span>
+            </span>
+        </span>
+        <span>₹${cgst}</span>
+    </div>
+    <div class="summary-row gst-row">
+        <span>
+            <span style="display:flex;align-items:center;gap:5px;">
+                SGST (2.5%)
+                <span title="State GST" style="font-size:10px;color:#999;cursor:help;">ⓘ</span>
+            </span>
+        </span>
+        <span>₹${sgst}</span>
+    </div>
+    <div class="summary-row" style="border-top:1px dashed #F5E6D3;padding-top:10px;">
+        <span>Shipping</span>
+        <span>${shipping === 0 ? 'FREE ✨' : '₹' + shipping}</span>
+    </div>
+    ${shippingBadge}
+    <div class="summary-row total">
+        <span>Total (incl. GST)</span>
+        <span>₹${total}</span>
+    </div>
+    <div style="text-align:center;font-size:11px;color:#888;margin-top:5px;">
+        📄 GST Invoice will be provided
+    </div>
+    <button class="checkout-btn" onclick="openCheckout()">🎉 Proceed to Checkout</button>
+    <a href="index.html#shop" class="continue-btn">← Continue Shopping</a>
+</div>
+                        
+                        <div class="summary-card" style="font-size:13px;color:#666;">
+                            <div style="margin-bottom:8px;">✅ 100% Secure Checkout</div>
+                            <div style="margin-bottom:8px;">💚 Pay via UPI (Instant)</div>
+                            <div style="margin-bottom:8px;">💯 Quality Guaranteed</div>
+                            <div>💵 Cash on Delivery Available</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        window.updateQty = function(index, change) {
+            cart[index].qty += change;
+            if (cart[index].qty < 1) cart[index].qty = 1;
+            saveCart();
+            renderCart();
+        };
+
+        window.removeItem = function(index) {
+            if (confirm(`Remove "${cart[index].name}" from cart?`)) {
+                cart.splice(index, 1);
+                saveCart();
+                renderCart();
+            }
+        };
+
+        window.openCheckout = function() {
+            document.getElementById('checkoutModal').classList.add('active');
+        };
+
+        window.closeCheckout = function() {
+            document.getElementById('checkoutModal').classList.remove('active');
+        };
+
+        window.closeSuccessAndGoHome = function() {
+            document.getElementById('successModal').classList.remove('active');
+            location.href = 'index.html';
+        };
+
+        // ✅ Checkout form submission
+        document.getElementById('checkoutForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('placeOrderBtn');
+            btn.disabled = true;
+            btn.textContent = 'Processing...';
+
+            let subtotal = 0;
+            cart.forEach(item => subtotal += item.price * item.qty);
+            const shipping = subtotal >= SHIPPING_THRESHOLD ? 0 : SHIPPING_CHARGE;
+            const total = subtotal + shipping;
+
+            // Recalculate GST for order data
+const orderSubtotal = subtotal;
+let orderGst, orderCgst, orderSgst, orderTotal;
+if (GST_INCLUSIVE) {
+    orderGst = subtotal - Math.round(subtotal / (1 + GST_RATE));
+} else {
+    orderGst = Math.round(subtotal * GST_RATE);
+}
+orderCgst = Math.round(orderGst / 2);
+orderSgst = orderGst - orderCgst;
+orderTotal = GST_INCLUSIVE ? subtotal + shipping : subtotal + orderGst + shipping;
+
+currentOrderData = {
+    customer: {
+        name: document.getElementById('custName').value,
+        phone: document.getElementById('custPhone').value,
+        email: document.getElementById('custEmail').value || '',
+        address: document.getElementById('custAddress').value,
+        city: document.getElementById('custCity').value,
+        pincode: document.getElementById('custPincode').value
+    },
+    items: [...cart],
+    subtotal: orderSubtotal,
+    gst: {
+        rate: '5%',
+        amount: orderGst,
+        cgst: orderCgst,
+        sgst: orderSgst
+    },
+    shipping: shipping,
+    total: orderTotal,
+    paymentMethod: document.getElementById('paymentMethod').value,
+    notes: document.getElementById('orderNotes').value || '',
+    status: 'pending',
+    paymentStatus: 'pending',
+    orderDate: new Date().toISOString()
+};
+
+            const paymentMethod = document.getElementById('paymentMethod').value;
+            closeCheckout();
+
+            if (paymentMethod === 'UPI') {
+                openUpiPayment(total);
+                btn.disabled = false;
+                btn.textContent = 'Continue →';
+            } else {
+                currentOrderId = 'SS-' + Date.now().toString().substring(6);
+                await placeOrder('COD');
+                btn.disabled = false;
+                btn.textContent = 'Continue →';
+            }
+        });
+
+        function openUpiPayment(amount) {
+    currentOrderId = 'SS-' + Date.now().toString().substring(6);
+    
+    document.getElementById('upiAmount').textContent = amount;
+    document.getElementById('paidAmount').textContent = amount;
+    document.getElementById('upiOrderId').textContent = currentOrderId;
+    
+    const upiUrl = generateUpiUrl(amount, currentOrderId);
+    
+    // ✅ Simple: Just use online QR API - no library needed!
+    const qrImageUrl = `https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(upiUrl)}&color=8B2500&bgcolor=FFFFFF&margin=10`;
+    
+    document.getElementById('qrcode').innerHTML = `
+        <img src="${qrImageUrl}" 
+             alt="UPI QR Code" 
+             style="width:220px;height:220px;display:block;"
+             onerror="this.parentElement.innerHTML='<div style=&quot;padding:40px;color:#8B2500;&quot;>📱<br>Please use UPI ID<br>or app buttons below</div>'">
+    `;
+    
+    // Set UPI app buttons
+    document.getElementById('gpayBtn').href = upiUrl;
+    document.getElementById('phonepeBtn').href = upiUrl.replace('upi://', 'phonepe://');
+    document.getElementById('paytmBtn').href = upiUrl.replace('upi://', 'paytmmp://');
+    document.getElementById('bhimBtn').href = upiUrl;
+    
+    // Show modal
+    document.getElementById('upiPaymentModal').classList.add('active');
+    
+    // Start 5-minute timer
+    startPaymentTimer();
+}
+
+        function generateUpiUrl(amount, orderId) {
+            const params = new URLSearchParams({
+                pa: UPI_CONFIG.id,
+                pn: UPI_CONFIG.name,
+                am: amount.toString(),
+                cu: 'INR',
+                tn: `Silk Spices Order ${orderId}`
+            });
+            return `upi://pay?${params.toString()}`;
+        }
+
+        function startPaymentTimer() {
+            let timeLeft = 300;
+            const timerEl = document.getElementById('timerDisplay');
+            const timerBox = document.getElementById('upiTimer');
+            
+            clearInterval(paymentTimerInterval);
+            paymentTimerInterval = setInterval(() => {
+                timeLeft--;
+                const mins = Math.floor(timeLeft / 60);
+                const secs = timeLeft % 60;
+                timerEl.textContent = `${String(mins).padStart(2,'0')}:${String(secs).padStart(2,'0')}`;
+                
+                if (timeLeft <= 60) {
+                    timerBox.classList.add('warning');
+                }
+                
+                if (timeLeft <= 0) {
+                    clearInterval(paymentTimerInterval);
+                    alert('⏱️ Payment window expired. Please try again.');
+                    cancelUpiPayment();
+                }
+            }, 1000);
+        }
+
+        window.copyUpiId = function() {
+            navigator.clipboard.writeText(UPI_CONFIG.id).then(() => {
+                const btn = document.getElementById('copyUpiBtn');
+                btn.textContent = '✓ Copied!';
+                btn.classList.add('copied');
+                setTimeout(() => {
+                    btn.textContent = '📋 Copy';
+                    btn.classList.remove('copied');
+                }, 2000);
+            });
+        };
+
+        window.cancelUpiPayment = function() {
+            if (confirm('Cancel this payment? Your cart will be preserved.')) {
+                clearInterval(paymentTimerInterval);
+                document.getElementById('upiPaymentModal').classList.remove('active');
+                currentOrderData = null;
+                currentOrderId = null;
+            }
+        };
+
+        window.confirmPayment = async function() {
+            if (!currentOrderData) {
+                alert('❌ Payment session expired. Please try again.');
+                return;
+            }
+            
+            const btn = document.getElementById('paidBtn');
+            btn.disabled = true;
+            btn.textContent = 'Processing...';
+            
+            clearInterval(paymentTimerInterval);
+            
+            currentOrderData.paymentStatus = 'claimed';
+            currentOrderData.upiOrderId = currentOrderId;
+            currentOrderData.paymentClaimedAt = new Date().toISOString();
+            
+            await placeOrder('UPI');
+        };
+
+        // ✅ FIXED placeOrder function
+        async function placeOrder(method) {
+            if (!currentOrderData) {
+                alert('❌ Order data missing. Please try again.');
+                return;
+            }
+            
+            // Save a local copy BEFORE any async operations
+            const orderDataCopy = JSON.parse(JSON.stringify(currentOrderData));
+            const savedOrderId = currentOrderId;
+            
+            try {
+                const docId = await saveOrder(orderDataCopy);
+                const orderId = savedOrderId || (docId ? 'SS-' + docId.substring(0, 8).toUpperCase() : 'SS-' + Date.now().toString().substring(6));
+                
+                // Clear cart AFTER successful save
+                cart = [];
+                saveCart();
+                
+                document.getElementById('upiPaymentModal').classList.remove('active');
+                
+                if (method === 'UPI') {
+                    document.getElementById('successIcon').textContent = '💚';
+                    document.getElementById('successTitle').textContent = 'Payment Received - Order Placed!';
+                    document.getElementById('paymentStatusMsg').textContent = '✅ Payment claim recorded. We will verify within 30 minutes.';
+                } else {
+                    document.getElementById('successIcon').textContent = '✅';
+                    document.getElementById('successTitle').textContent = 'Order Placed Successfully!';
+                    document.getElementById('paymentStatusMsg').textContent = '💵 Pay via Cash on Delivery';
+                }
+                
+                document.getElementById('orderIdDisplay').textContent = 'Order ID: ' + orderId;
+                document.getElementById('orderPhoneDisplay').textContent = '+91-' + orderDataCopy.customer.phone;
+                document.getElementById('successModal').classList.add('active');
+                
+                // Send WhatsApp notification
+                sendWhatsAppNotification(orderId, orderDataCopy, method);
+                
+                // Send order confirmation email
+                if (orderDataCopy.customer.email) {
+                    sendOrderConfirmationEmail(orderId, orderDataCopy, method);
+                }
+                
+                // Clear currentOrderData AFTER all operations complete
+                currentOrderData = null;
+                currentOrderId = null;
+                
+            } catch (error) {
+                console.error('Place order error:', error);
+                alert('❌ Failed to place order. Please try again.\n\nError: ' + error.message);
+                
+                const btn = document.getElementById('paidBtn');
+                if (btn && orderDataCopy) {
+                    btn.disabled = false;
+                    btn.innerHTML = '✅ I have paid ₹<span id="paidAmount">' + orderDataCopy.total + '</span>';
+                }
+            }
+        }
+
+        function sendWhatsAppNotification(orderId, orderData, method) {
+            const BUSINESS_WHATSAPP = '917573951513';
+            
+            let itemsList = orderData.items.map((item, i) => 
+                `${i+1}. ${item.name} (${item.weight}) x ${item.qty} = Rs.${item.price * item.qty}`
+            ).join('%0A');
+            
+            const paymentEmoji = method === 'UPI' ? '💚' : '💵';
+            const paymentStatus = method === 'UPI' 
+                ? `%0A*⚠️ VERIFY UPI PAYMENT of Rs.${orderData.total}*` 
+                : '';
+            
+            const message = `${paymentEmoji} NEW ORDER RECEIVED!%0A%0A` +
+                `*Order ID:* ${orderId}%0A` +
+                `*Date:* ${new Date().toLocaleString('en-IN')}%0A` +
+                `*Payment:* ${method}${paymentStatus}%0A%0A` +
+                `*Customer Details:*%0A` +
+                `Name: ${orderData.customer.name}%0A` +
+                `Phone: +91-${orderData.customer.phone}%0A` +
+                `Email: ${orderData.customer.email || 'N/A'}%0A` +
+                `Address: ${orderData.customer.address}%0A` +
+                `City: ${orderData.customer.city} - ${orderData.customer.pincode}%0A%0A` +
+                `*Items Ordered:*%0A${itemsList}%0A%0A` +
+                `*Order Summary:*%0A` +
+`Subtotal: Rs.${orderData.subtotal}%0A` +
+`CGST (2.5%): Rs.${orderData.gst?.cgst || 0}%0A` +
+`SGST (2.5%): Rs.${orderData.gst?.sgst || 0}%0A` +
+`Shipping: ${orderData.shipping === 0 ? 'FREE' : 'Rs.' + orderData.shipping}%0A` +
+`*Total (incl. GST): Rs.${orderData.total}*%0A%0A` +
+                (orderData.notes ? `Notes: ${orderData.notes}%0A` : '') +
+                `%0A_Sent from silk-spices.web.app_`;
+            
+            const whatsappURL = `https://wa.me/${BUSINESS_WHATSAPP}?text=${message}`;
+            window.open(whatsappURL, '_blank');
+        }
+
+        async function sendOrderConfirmationEmail(orderId, orderData, method) {
+            try {
+                await fetch('/api/send-order-confirmation', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        to: orderData.customer.email,
+                        customerName: orderData.customer.name,
+                        orderId: orderId,
+                        amount: orderData.total,
+                        paymentMethod: method,
+                        paymentStatus: method === 'UPI' ? 'Payment Claimed - Verification Pending' : 'Cash on Delivery',
+                        items: orderData.items,
+                        subtotal: orderData.subtotal,
+                        shipping: orderData.shipping,
+                        address: `${orderData.customer.address}, ${orderData.customer.city} - ${orderData.customer.pincode}`,
+                        phone: orderData.customer.phone
+                    })
+                });
+                console.log('✅ Email sent');
+            } catch (e) {
+                console.log('ℹ️ Email will work after Vercel deployment');
+            }
+        }
+
+        document.getElementById('checkoutModal').addEventListener('click', (e) => {
+            if (e.target.id === 'checkoutModal') closeCheckout();
+        });
+
+        init();
+    </script>
+</body>
+</html>

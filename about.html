@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Silk Spices | Silkpath Enterprise</title>
+    <meta name="description" content="Learn about Silk Spices, a brand of Silkpath Enterprise - bringing authentic Indian spices from our farms to your kitchen.">
+    <link rel="icon" href="images/logo.png">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, sans-serif; }
+        body { background: #FFF8F0; color: #333; line-height: 1.6; }
+        .top-bar { background: #8B2500; color: white; padding: 8px 20px; text-align: center; font-size: 13px; }
+        header { background: white; padding: 15px 40px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; flex-wrap: wrap; gap: 15px; }
+        .logo { display: flex; align-items: center; gap: 12px; cursor: pointer; }
+        .logo img { width: 50px; }
+        .logo-text { color: #8B2500; font-size: 26px; font-weight: 800; line-height: 1; }
+        .logo-sub { font-size: 10px; color: #8B2500; letter-spacing: 2px; margin-top: 3px; }
+        nav ul { list-style: none; display: flex; gap: 25px; }
+        nav a { text-decoration: none; color: #333; font-weight: 600; font-size: 15px; transition: color 0.3s; padding-bottom: 4px; border-bottom: 2px solid transparent; }
+        nav a:hover, nav a.active { color: #E85D25; border-bottom-color: #E85D25; }
+        .hero { background: linear-gradient(135deg, #8B2500 0%, #E85D25 100%); color: white; padding: 100px 20px 80px; text-align: center; position: relative; overflow: hidden; }
+        .hero h1 { font-size: 58px; margin-bottom: 20px; position: relative; z-index: 1; }
+        .hero p { font-size: 22px; opacity: 0.95; max-width: 800px; margin: 0 auto; position: relative; z-index: 1; line-height: 1.6; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 60px 20px; }
+        .story-section { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; margin-bottom: 80px; }
+        .story-section img { width: 100%; border-radius: 20px; box-shadow: 0 15px 40px rgba(139,37,0,0.15); }
+        .story-content h2 { color: #8B2500; font-size: 42px; margin-bottom: 25px; }
+        .story-content h2::after { content: ''; display: block; width: 60px; height: 4px; background: #E85D25; margin-top: 10px; border-radius: 2px; }
+        .story-content p { font-size: 18px; color: #444; margin-bottom: 18px; line-height: 1.8; }
+        .story-content strong { color: #8B2500; font-weight: 700; }
+        .mv-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-bottom: 80px; }
+        .mv-card { background: white; padding: 40px 35px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.06); border-top: 5px solid #E85D25; transition: transform 0.3s; }
+        .mv-card:hover { transform: translateY(-8px); }
+        .mv-card .icon { font-size: 55px; margin-bottom: 15px; }
+        .mv-card h4 { color: #8B2500; font-size: 26px; margin-bottom: 15px; }
+        .mv-card p { color: #666; font-size: 16px; }
+        .section-title { text-align: center; font-size: 36px; color: #8B2500; margin-bottom: 10px; }
+        .section-subtitle { text-align: center; color: #888; margin-bottom: 40px; font-size: 16px; }
+        .values-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 25px; margin-bottom: 80px; }
+        .value-card { background: white; padding: 35px 25px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.06); text-align: center; transition: all 0.3s; }
+        .value-card:hover { transform: translateY(-5px); box-shadow: 0 15px 35px rgba(232,93,37,0.15); }
+        .value-card .icon { font-size: 55px; margin-bottom: 15px; }
+        .value-card h4 { color: #8B2500; margin-bottom: 10px; font-size: 20px; }
+        .value-card p { color: #666; font-size: 14px; }
+        
+        .certifications-section { background: linear-gradient(135deg, #FFF8F0 0%, #F5E6D3 100%); padding: 60px 40px; border-radius: 20px; margin-bottom: 80px; border: 2px solid #E85D25; }
+.cert-title { text-align: center; color: #8B2500; margin-bottom: 10px; font-size: 36px; }
+.cert-subtitle { text-align: center; color: #555; margin-bottom: 40px; font-size: 16px; }
+.cert-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; max-width: 1100px; margin: 0 auto; }
+.cert-card { background: white; padding: 30px 25px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.08); text-align: center; transition: all 0.3s; border-top: 4px solid #E85D25; }
+.cert-card:hover { transform: translateY(-5px); box-shadow: 0 15px 35px rgba(232,93,37,0.20); }
+.cert-logo { width: 100%; height: 180px; display: flex; align-items: center; justify-content: center; background: white; border-radius: 10px; margin-bottom: 20px; padding: 15px; font-size: 100px; }
+.cert-logo img { max-width: 100%; max-height: 100%; object-fit: contain; }
+.cert-card h4 { color: #8B2500; margin-bottom: 15px; font-size: 20px; min-height: 55px; }
+.cert-card p { color: #555; font-size: 14px; font-style: italic; line-height: 1.6; }
+        
+        .stats-section { background: linear-gradient(135deg, #8B2500 0%, #E85D25 100%); color: white; padding: 60px 20px; border-radius: 20px; margin-bottom: 80px; }
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 30px; text-align: center; max-width: 1000px; margin: 0 auto; }
+        .stat-item .number { font-size: 48px; font-weight: 800; margin-bottom: 5px; }
+        .stat-item .label { font-size: 15px; opacity: 0.9; }
+        .cta-section { background: white; padding: 60px 40px; border-radius: 20px; text-align: center; box-shadow: 0 10px 40px rgba(0,0,0,0.08); margin-bottom: 40px; }
+        .cta-section h2 { color: #8B2500; font-size: 32px; margin-bottom: 15px; }
+        .cta-section p { color: #666; font-size: 17px; margin-bottom: 30px; }
+        .cta-buttons { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; }
+        .btn { display: inline-block; padding: 14px 32px; border-radius: 30px; text-decoration: none; font-weight: 600; font-size: 15px; transition: all 0.3s; cursor: pointer; border: none; }
+        .btn-primary { background: linear-gradient(135deg, #E85D25, #8B2500); color: white; }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(232,93,37,0.4); }
+        .btn-secondary { background: white; color: #8B2500; border: 2px solid #8B2500; }
+        .btn-secondary:hover { background: #8B2500; color: white; }
+        /* ===== FOOTER ===== */
+/* ===== FOOTER (Matches Home Page) ===== */
+/* ===== FOOTER (Matches Home Page) ===== */
+footer { background:#3a2817; color:#fff; padding:40px 20px 20px; margin-top:60px; }
+.footer-content { max-width:1300px; margin:auto; display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:30px; }
+.footer-col h3 { color:#D2691E; margin-bottom:15px; font-size:16px; }
+.footer-col p, .footer-col a { color:#c9b8a5; font-size:14px; text-decoration:none; display:block; margin-bottom:8px; }
+.footer-col a:hover { color:#D2691E; }
+.footer-bottom { text-align:center; margin-top:30px; padding-top:20px; border-top:1px solid #5a4a37; color:#c9b8a5; font-size:13px; }
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 36px; } .hero p { font-size: 16px; }
+            .story-section { grid-template-columns: 1fr; gap: 30px; }
+            .mv-grid { grid-template-columns: 1fr; }
+            nav ul { gap: 15px; font-size: 13px; } header { padding: 15px 20px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="top-bar">🚚 Free Shipping on Orders Above ₹999 | 📞 Call: +91-7573951513</div>
+    
+    <header>
+        <div class="logo" onclick="location.href='index.html'">
+            <img src="images/logo.png" alt="Silk Spices">
+            <div>
+                <div class="logo-text">Silk Spices</div>
+                <div class="logo-sub">SILKPATH ENTERPRISE</div>
+            </div>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#shop">Shop</a></li>
+                <li><a href="about.html" class="active">About</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1>Our Story</h1>
+        <p>From the fertile fields of India to your kitchen shelf — bringing you nature's finest spices with love, tradition, and uncompromised quality.</p>
+    </section>
+
+    <div class="container">
+        
+        <div class="story-section">
+            <div class="story-content">
+                <h2>Who We Are</h2>
+                <p><strong>Silk Spices</strong> is a proud brand of <strong>Silkpath Enterprise</strong>, dedicated to preserving the authentic flavors of Indian cuisine through pure, high-quality spices.</p>
+                <p>Our journey began with a simple belief: that every meal deserves the finest ingredients. From the vibrant turmeric fields of Erode to the aromatic cardamom estates of Kerala, we source directly from farmers who share our passion for quality.</p>
+                <p>Every spice in our collection is carefully selected, hygienically processed, and packaged with modern technology to lock in freshness and flavor — bringing you the true taste of India in every pinch.</p>
+            </div>
+            <div>
+                <img src="images/logo.png" alt="Silk Spices" style="max-width:400px;margin:0 auto;display:block;background:linear-gradient(135deg,#FFF8F0,#F5E6D3);padding:40px;">
+            </div>
+        </div>
+
+        <div class="mv-grid">
+            <div class="mv-card">
+                <div class="icon">🎯</div>
+                <h4>Our Mission</h4>
+                <p>To deliver 100% pure, unadulterated spices that transform everyday cooking into an authentic Indian culinary experience. We are committed to quality, sustainability, and empowering the farming communities that make it all possible.</p>
+            </div>
+            <div class="mv-card">
+                <div class="icon">👁️</div>
+                <h4>Our Vision</h4>
+                <p>To become India's most trusted spice brand, taking the rich flavors of our heritage to every kitchen — locally and globally — while maintaining the highest standards of purity, safety, and traditional quality.</p>
+            </div>
+        </div>
+
+        <h2 class="section-title">Why Choose Silk Spices?</h2>
+        <p class="section-subtitle">Quality, purity, and tradition in every pack</p>
+        <div class="values-grid">
+            <div class="value-card"><div class="icon">🌿</div><h4>100% Natural</h4><p>No preservatives, no artificial colors, no additives — just pure spices as nature intended.</p></div>
+            <div class="value-card"><div class="icon">🏭</div><h4>Factory Sealed</h4><p>Modern packaging technology preserves freshness, aroma, and flavor from our facility to your kitchen.</p></div>
+            <div class="value-card"><div class="icon">✅</div><h4>FSSAI Certified</h4><p>Fully compliant with Indian food safety standards. Every batch tested for quality and purity.</p></div>
+            <div class="value-card"><div class="icon">🚚</div><h4>Fast Delivery</h4><p>Quick, reliable shipping across India. Free delivery on orders above ₹499.</p></div>
+            <div class="value-card"><div class="icon">🌾</div><h4>Farm Fresh</h4><p>Sourced directly from trusted farmers, ensuring authenticity and supporting agricultural communities.</p></div>
+            <div class="value-card"><div class="icon">💎</div><h4>Premium Quality</h4><p>Hand-selected, expertly ground, and rigorously tested. Only the best makes it to your table.</p></div>
+            <div class="value-card"><div class="icon">♻️</div><h4>Eco-Friendly</h4><p>Sustainable packaging and responsible sourcing — good for you and good for the planet.</p></div>
+            <div class="value-card"><div class="icon">❤️</div><h4>Made with Love</h4><p>Traditional recipes, modern quality — every product is crafted with care and passion.</p></div>
+        </div>
+
+        <!-- Certifications Section -->
+        <div class="certifications-section">
+            <h2 class="cert-title">Certifications & Memberships</h2>
+            <p class="cert-subtitle">Our commitment to quality, safety, and global standards</p>
+            <div class="cert-grid">
+                <div class="cert-card">
+                    <div class="cert-logo">
+                        <img src="images/cert-spices-board.png" alt="Spices Board of India" onerror="this.style.display='none'; this.parentElement.innerHTML='🚢';">
+                    </div>
+                    <h4>Spices Board of India</h4>
+                    <p>Member of the Spices Board of India — the national benchmark for spice quality, authenticity, and traceability. Ensuring authentic Indian spices worldwide.</p>
+                </div>
+                <div class="cert-card">
+                    <div class="cert-logo">
+                        <img src="images/cert-fssai.png" alt="FSSAI" onerror="this.style.display='none'; this.parentElement.innerHTML='✅';">
+                    </div>
+                    <h4>Food Safety & Standards Authority (FSSAI)</h4>
+                    <p>FSSAI certified facility — guaranteeing every spice meets India's strictest food safety and hygiene standards from processing to packaging.</p>
+                </div>
+                <div class="cert-card">
+                    <div class="cert-logo">
+                        <img src="images/cert-apeda.png" alt="APEDA" onerror="this.style.display='none'; this.parentElement.innerHTML='🌾';">
+                    </div>
+                    <h4>APEDA (Ministry of Commerce)</h4>
+                    <p>APEDA registered exporter — authorized to export premium processed spices and food products to international markets worldwide.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stats Section -->
+        <div class="stats-section">
+            <div class="stats-grid">
+                <div class="stat-item"><div class="number">28+</div><div class="label">Premium Spices</div></div>
+                <div class="stat-item"><div class="number">10K+</div><div class="label">Happy Customers</div></div>
+                <div class="stat-item"><div class="number">100%</div><div class="label">Pure & Natural</div></div>
+                <div class="stat-item"><div class="number">4.8★</div><div class="label">Customer Rating</div></div>
+            </div>
+        </div>
+
+        <div class="cta-section">
+            <h2>Ready to Experience the Silk Spices Difference?</h2>
+            <p>Explore our full range of authentic Indian spices and elevate your cooking today.</p>
+            <div class="cta-buttons">
+                <a href="index.html#shop" class="btn btn-primary">🛒 Shop Now</a>
+                <a href="index.html#contact" class="btn btn-secondary">📞 Contact Us</a>
+            </div>
+        </div>
+
+    </div>
+
+    <footer id="contact">
+  <div class="footer-content">
+    <div class="footer-col">
+      <h3>
+        <img src="images/logo.png" alt="Silk Spices" style="height:50px;vertical-align:middle;margin-right:8px;">
+        Silk Spices
+      </h3>
+      <p>Premium quality Indian spices, freshly ground and packed with love.</p>
+      <p style="margin-top:10px;font-size:12px;opacity:0.8;">A Silk Path Enterprise brand</p>
+      <div style="margin-top:15px;display:flex;gap:10px;">
+        <a href="https://wa.me/917573951513" target="_blank" style="background:#25D366;color:#fff;padding:8px 12px;border-radius:20px;font-size:13px;text-decoration:none;display:inline-block;">💬 WhatsApp</a>
+        <a href="https://instagram.com/silkpathenterprise" target="_blank" style="background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);color:#fff;padding:8px 12px;border-radius:20px;font-size:13px;text-decoration:none;display:inline-block;">📸 Instagram</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h3>Quick Links</h3>
+      <a href="index.html">Home</a>
+      <a href="index.html#products">Shop</a>
+      <a href="about.html">About Us</a>
+    </div>
+    <div class="footer-col">
+      <h3>Customer Care</h3>
+      <a href="#">Shipping Policy</a>
+      <a href="#">Return Policy</a>
+      <a href="index.html#contact">Contact Us</a>
+    </div>
+    <div class="footer-col">
+      <h3>Contact</h3>
+      <p><a href="tel:+917573951513" style="color:#c9b8a5;text-decoration:none;">📞 +91-7573951513</a></p>
+      <p><a href="mailto:orders@silkpathenterprise.com" style="color:#c9b8a5;text-decoration:none;">✉️ orders@silkpathenterprise.com</a></p>
+      <p>📍 Vadodara, Gujarat, India</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    &copy; 2026 Silk Spices | A Silk Path Enterprise brand | All Rights Reserved
+  </div>
+</body>
+</html>
