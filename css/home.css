@@ -1,1 +1,1050 @@
+/* ==========================================================
+   SILK SPICES
+   HOME.CSS
+   PART 1
+   Hero + Categories
+==========================================================*/
 
+
+/* ----------------------------------------------------------
+   HERO
+-----------------------------------------------------------*/
+
+.hero{
+
+    background:
+    linear-gradient(
+        135deg,
+        #8B2500 0%,
+        #C24B00 45%,
+        #D2691E 100%
+    );
+
+    color:white;
+
+    text-align:center;
+
+    padding:
+        clamp(60px,8vw,90px)
+        20px;
+
+}
+
+.hero .container{
+
+    max-width:900px;
+
+}
+
+.hero h1{
+
+    margin-bottom:20px;
+
+    font-size:clamp(2.4rem,6vw,4rem);
+
+    font-weight:800;
+
+    line-height:1.15;
+
+    letter-spacing:-1px;
+
+}
+
+.hero p{
+
+    color:rgba(255,255,255,.92);
+
+    font-size:clamp(1rem,2vw,1.25rem);
+
+    max-width:760px;
+
+    margin:auto;
+
+    line-height:1.8;
+
+}
+
+
+/* ----------------------------------------------------------
+   TRUST BADGES
+-----------------------------------------------------------*/
+
+.hero-badges{
+
+    display:flex;
+
+    justify-content:center;
+
+    flex-wrap:wrap;
+
+    gap:14px;
+
+    margin-top:36px;
+
+}
+
+.hero-badge{
+
+    background:rgba(255,255,255,.16);
+
+    backdrop-filter:blur(8px);
+
+    border:1px solid rgba(255,255,255,.18);
+
+    padding:12px 22px;
+
+    border-radius:999px;
+
+    font-size:.95rem;
+
+    font-weight:500;
+
+    transition:.25s;
+
+}
+
+.hero-badge:hover{
+
+    transform:translateY(-2px);
+
+    background:rgba(255,255,255,.22);
+
+}
+
+
+/* ----------------------------------------------------------
+   CATEGORY SECTION
+-----------------------------------------------------------*/
+
+.categories{
+
+    max-width:1280px;
+
+    margin:60px auto 30px;
+
+    padding:0 20px;
+
+}
+
+.cat-title{
+
+    text-align:center;
+
+    color:#8B2500;
+
+    margin-bottom:30px;
+
+    font-size:clamp(1.8rem,3vw,2.4rem);
+
+    font-weight:700;
+
+}
+
+
+/* ----------------------------------------------------------
+   CATEGORY BUTTONS
+-----------------------------------------------------------*/
+
+.cat-filters{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:12px;
+
+    flex-wrap:wrap;
+
+}
+
+.cat-btn{
+
+    background:white;
+
+    color:#8B2500;
+
+    border:2px solid #D2691E;
+
+    border-radius:999px;
+
+    padding:12px 24px;
+
+    cursor:pointer;
+
+    font-size:.95rem;
+
+    font-weight:600;
+
+    transition:.25s;
+
+}
+
+.cat-btn:hover{
+
+    background:#D2691E;
+
+    color:white;
+
+    transform:translateY(-2px);
+
+}
+
+.cat-btn.active{
+
+    background:#D2691E;
+
+    color:white;
+
+}
+
+
+/* ----------------------------------------------------------
+   SECTION SPACING
+-----------------------------------------------------------*/
+
+.section{
+
+    padding:70px 20px;
+
+}
+
+.section-title{
+
+    text-align:center;
+
+    color:#8B2500;
+
+    font-size:clamp(1.8rem,3vw,2.5rem);
+
+    margin-bottom:14px;
+
+    font-weight:700;
+
+}
+
+.section-subtitle{
+
+    text-align:center;
+
+    color:#7A6A5A;
+
+    max-width:720px;
+
+    margin:auto;
+
+    margin-bottom:50px;
+
+}
+
+
+/* ----------------------------------------------------------
+   RESPONSIVE
+-----------------------------------------------------------*/
+
+@media(max-width:768px){
+
+.hero{
+
+    padding:55px 18px;
+
+}
+
+.hero h1{
+
+    font-size:2.2rem;
+
+}
+
+.hero p{
+
+    font-size:15px;
+
+}
+
+.hero-badge{
+
+    padding:10px 18px;
+
+    font-size:13px;
+
+}
+
+.categories{
+
+    margin-top:45px;
+
+}
+
+.cat-filters{
+
+    justify-content:flex-start;
+
+    overflow-x:auto;
+
+    flex-wrap:nowrap;
+
+    padding-bottom:8px;
+
+    scrollbar-width:none;
+
+}
+
+.cat-filters::-webkit-scrollbar{
+
+    display:none;
+
+}
+
+.cat-btn{
+
+    white-space:nowrap;
+
+    flex-shrink:0;
+
+}
+
+}
+/* ==========================================================
+   SILK SPICES
+   HOME.CSS
+   PART 2
+   Product Grid + Cards
+==========================================================*/
+
+
+/* ----------------------------------------------------------
+   PRODUCTS SECTION
+-----------------------------------------------------------*/
+
+.products{
+
+    max-width:1280px;
+
+    margin:auto;
+
+    padding:0 20px 80px;
+
+}
+
+
+/* ----------------------------------------------------------
+   PRODUCT GRID
+-----------------------------------------------------------*/
+
+.product-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(
+            auto-fit,
+            minmax(260px,1fr)
+        );
+
+    gap:28px;
+
+}
+
+
+/* ----------------------------------------------------------
+   PRODUCT CARD
+-----------------------------------------------------------*/
+
+.product-card{
+
+    background:white;
+
+    border-radius:20px;
+
+    overflow:hidden;
+
+    box-shadow:
+        0 8px 24px
+        rgba(0,0,0,.08);
+
+    transition:.3s;
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+.product-card:hover{
+
+    transform:translateY(-6px);
+
+    box-shadow:
+        0 18px 36px
+        rgba(0,0,0,.12);
+
+}
+
+
+/* ----------------------------------------------------------
+   PRODUCT IMAGE
+-----------------------------------------------------------*/
+
+.product-image{
+
+    width:100%;
+
+    height:250px;
+
+    overflow:hidden;
+
+    background:#faf7f3;
+
+}
+
+.product-image img{
+
+    width:100%;
+
+    height:100%;
+
+    object-fit:cover;
+
+    transition:.35s;
+
+}
+
+.product-card:hover .product-image img{
+
+    transform:scale(1.05);
+
+}
+
+
+/* ----------------------------------------------------------
+   PRODUCT CONTENT
+-----------------------------------------------------------*/
+
+.product-content{
+
+    padding:22px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    flex:1;
+
+}
+
+.product-name{
+
+    color:#8B2500;
+
+    font-size:1.25rem;
+
+    font-weight:700;
+
+    margin-bottom:10px;
+
+}
+
+.product-description{
+
+    color:#7A6A5A;
+
+    line-height:1.7;
+
+    font-size:.95rem;
+
+    margin-bottom:18px;
+
+    flex:1;
+
+}
+
+
+/* ----------------------------------------------------------
+   PRODUCT PRICE
+-----------------------------------------------------------*/
+
+.product-price{
+
+    color:#D2691E;
+
+    font-size:1.25rem;
+
+    font-weight:700;
+
+    margin-bottom:18px;
+
+}
+
+
+/* ----------------------------------------------------------
+   PRODUCT BUTTON
+-----------------------------------------------------------*/
+
+.product-btn{
+
+    width:100%;
+
+    border:none;
+
+    cursor:pointer;
+
+    background:#8B2500;
+
+    color:white;
+
+    padding:14px;
+
+    border-radius:12px;
+
+    font-size:.95rem;
+
+    font-weight:600;
+
+    transition:.25s;
+
+}
+
+.product-btn:hover{
+
+    background:#D2691E;
+
+}
+
+
+/* ----------------------------------------------------------
+   PRODUCT BADGE
+-----------------------------------------------------------*/
+
+.product-badge{
+
+    position:absolute;
+
+    top:16px;
+
+    left:16px;
+
+    background:#D2691E;
+
+    color:white;
+
+    padding:6px 12px;
+
+    border-radius:999px;
+
+    font-size:.75rem;
+
+    font-weight:600;
+
+}
+
+.product-card-top{
+
+    position:relative;
+
+}
+
+
+/* ----------------------------------------------------------
+   EMPTY STATE
+-----------------------------------------------------------*/
+
+.no-products{
+
+    text-align:center;
+
+    padding:60px 20px;
+
+    color:#7A6A5A;
+
+    font-size:1rem;
+
+}
+
+
+/* ----------------------------------------------------------
+   RESPONSIVE
+-----------------------------------------------------------*/
+
+@media(max-width:768px){
+
+.product-grid{
+
+    grid-template-columns:1fr;
+
+    gap:22px;
+
+}
+
+.product-image{
+
+    height:220px;
+
+}
+
+.product-content{
+
+    padding:18px;
+
+}
+
+.product-name{
+
+    font-size:1.15rem;
+
+}
+
+.product-price{
+
+    font-size:1.1rem;
+
+}
+
+.product-btn{
+
+    padding:13px;
+
+}
+
+}
+/* ==========================================================
+   SILK SPICES
+   HOME.CSS
+   PART 3
+   Features + Testimonials + CTA + Footer
+==========================================================*/
+
+
+/* ----------------------------------------------------------
+   FEATURES SECTION
+-----------------------------------------------------------*/
+
+.features{
+
+    background:#FFF8F2;
+
+    padding:80px 20px;
+
+}
+
+.features-grid{
+
+    max-width:1200px;
+
+    margin:auto;
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(
+            auto-fit,
+            minmax(250px,1fr)
+        );
+
+    gap:28px;
+
+}
+
+.feature-card{
+
+    background:white;
+
+    border-radius:18px;
+
+    padding:32px 24px;
+
+    text-align:center;
+
+    box-shadow:
+        0 8px 22px
+        rgba(0,0,0,.06);
+
+    transition:.3s;
+
+}
+
+.feature-card:hover{
+
+    transform:translateY(-6px);
+
+    box-shadow:
+        0 16px 32px
+        rgba(0,0,0,.10);
+
+}
+
+.feature-icon{
+
+    width:70px;
+
+    height:70px;
+
+    margin:0 auto 18px;
+
+    border-radius:50%;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    background:#FFE7D3;
+
+    color:#D2691E;
+
+    font-size:2rem;
+
+}
+
+.feature-card h3{
+
+    color:#8B2500;
+
+    margin-bottom:12px;
+
+    font-size:1.25rem;
+
+    font-weight:700;
+
+}
+
+.feature-card p{
+
+    color:#7A6A5A;
+
+    line-height:1.7;
+
+    font-size:.95rem;
+
+}
+
+
+/* ----------------------------------------------------------
+   TESTIMONIALS
+-----------------------------------------------------------*/
+
+.testimonials{
+
+    padding:80px 20px;
+
+}
+
+.testimonial-grid{
+
+    max-width:1200px;
+
+    margin:auto;
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(
+            auto-fit,
+            minmax(300px,1fr)
+        );
+
+    gap:28px;
+
+}
+
+.testimonial-card{
+
+    background:white;
+
+    border-radius:20px;
+
+    padding:28px;
+
+    box-shadow:
+        0 8px 24px
+        rgba(0,0,0,.08);
+
+}
+
+.testimonial-text{
+
+    color:#555;
+
+    line-height:1.8;
+
+    margin-bottom:20px;
+
+    font-style:italic;
+
+}
+
+.testimonial-author{
+
+    color:#8B2500;
+
+    font-weight:700;
+
+}
+
+.testimonial-location{
+
+    color:#7A6A5A;
+
+    font-size:.9rem;
+
+    margin-top:4px;
+
+}
+
+
+/* ----------------------------------------------------------
+   CALL TO ACTION
+-----------------------------------------------------------*/
+
+.cta{
+
+    margin:80px auto;
+
+    max-width:1200px;
+
+    border-radius:24px;
+
+    overflow:hidden;
+
+    padding:70px 20px;
+
+    text-align:center;
+
+    color:white;
+
+    background:
+    linear-gradient(
+        135deg,
+        #8B2500,
+        #D2691E
+    );
+
+}
+
+.cta h2{
+
+    font-size:clamp(2rem,4vw,3rem);
+
+    margin-bottom:18px;
+
+    font-weight:700;
+
+}
+
+.cta p{
+
+    max-width:700px;
+
+    margin:auto;
+
+    margin-bottom:30px;
+
+    color:rgba(255,255,255,.92);
+
+    line-height:1.8;
+
+}
+
+.cta-btn{
+
+    display:inline-block;
+
+    background:white;
+
+    color:#8B2500;
+
+    text-decoration:none;
+
+    padding:15px 32px;
+
+    border-radius:999px;
+
+    font-weight:700;
+
+    transition:.3s;
+
+}
+
+.cta-btn:hover{
+
+    background:#FFE7D3;
+
+    transform:translateY(-2px);
+
+}
+
+
+/* ----------------------------------------------------------
+   NEWSLETTER
+-----------------------------------------------------------*/
+
+.newsletter{
+
+    background:#FFF8F2;
+
+    padding:70px 20px;
+
+    text-align:center;
+
+}
+
+.newsletter-form{
+
+    max-width:600px;
+
+    margin:35px auto 0;
+
+    display:flex;
+
+    gap:14px;
+
+    flex-wrap:wrap;
+
+    justify-content:center;
+
+}
+
+.newsletter-form input{
+
+    flex:1;
+
+    min-width:240px;
+
+    padding:15px 18px;
+
+    border:1px solid #ddd;
+
+    border-radius:12px;
+
+    font-size:1rem;
+
+    outline:none;
+
+}
+
+.newsletter-form input:focus{
+
+    border-color:#D2691E;
+
+}
+
+.newsletter-form button{
+
+    background:#8B2500;
+
+    color:white;
+
+    border:none;
+
+    padding:15px 28px;
+
+    border-radius:12px;
+
+    cursor:pointer;
+
+    font-weight:600;
+
+    transition:.25s;
+
+}
+
+.newsletter-form button:hover{
+
+    background:#D2691E;
+
+}
+
+
+/* ----------------------------------------------------------
+   FOOTER SPACING
+-----------------------------------------------------------*/
+
+.home-footer{
+
+    margin-top:80px;
+
+}
+
+
+/* ----------------------------------------------------------
+   SIMPLE ANIMATIONS
+-----------------------------------------------------------*/
+
+.fade-up{
+
+    animation:fadeUp .8s ease both;
+
+}
+
+@keyframes fadeUp{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(30px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+
+/* ----------------------------------------------------------
+   RESPONSIVE
+-----------------------------------------------------------*/
+
+@media(max-width:768px){
+
+.features{
+
+    padding:60px 18px;
+
+}
+
+.testimonials{
+
+    padding:60px 18px;
+
+}
+
+.cta{
+
+    padding:55px 18px;
+
+    margin:60px 18px;
+
+}
+
+.newsletter{
+
+    padding:60px 18px;
+
+}
+
+.newsletter-form{
+
+    flex-direction:column;
+
+}
+
+.newsletter-form input{
+
+    width:100%;
+
+}
+
+.newsletter-form button{
+
+    width:100%;
+
+}
+
+}
