@@ -1,67 +1,122 @@
-/* ==========================================
-   SILK SPICES VERSION 2
-   GLOBAL DESIGN SYSTEM
-   ========================================== */
+/* ==========================================================
+   SILK SPICES
+   GLOBAL.CSS
+   Global Design System
+==========================================================*/
+
+
+/* ----------------------------------------------------------
+   ROOT VARIABLES
+-----------------------------------------------------------*/
 
 :root{
 
-    /* Brand */
+    /* Brand Colors */
 
     --primary:#8B2500;
+
     --primary-light:#D2691E;
+
+    --primary-dark:#6B1D00;
+
+    --secondary:#F5A623;
 
     --background:#FFF8F0;
 
-    --surface:#ffffff;
+    --surface:#FFFFFF;
+
+    --surface-light:#FFFDF9;
 
     --text:#3A2817;
 
     --muted:#7A6A5A;
 
+    --border:#F0D9B5;
+
     --success:#4CAF50;
 
-    --border:#F0D9B5;
+    --danger:#E53935;
+
+    --warning:#F9A825;
+
 
     /* Radius */
 
     --radius-sm:8px;
+
     --radius-md:12px;
+
     --radius-lg:18px;
+
     --radius-xl:24px;
 
-    /* Shadow */
+    --radius-pill:999px;
 
-    --shadow-sm:0 2px 8px rgba(0,0,0,.06);
 
-    --shadow-md:0 4px 16px rgba(0,0,0,.08);
+    /* Shadows */
 
-    --shadow-lg:0 8px 30px rgba(0,0,0,.12);
+    --shadow-sm:
+        0 2px 8px rgba(0,0,0,.06);
+
+    --shadow-md:
+        0 6px 18px rgba(0,0,0,.08);
+
+    --shadow-lg:
+        0 12px 32px rgba(0,0,0,.12);
+
 
     /* Layout */
 
     --container:1280px;
 
+
+    /* Transition */
+
+    --transition:.3s ease;
+
+
     /* Spacing */
 
     --space-1:.5rem;
+
     --space-2:1rem;
+
     --space-3:1.5rem;
+
     --space-4:2rem;
+
     --space-5:3rem;
+
     --space-6:4rem;
+
+
+    /* Header */
+
+    --header-height:80px;
 
 }
 
-/* ---------- RESET ---------- */
 
-*{
+/* ----------------------------------------------------------
+   RESET
+-----------------------------------------------------------*/
+
+*,
+*::before,
+*::after{
+
     margin:0;
+
     padding:0;
+
     box-sizing:border-box;
+
 }
 
 html{
+
     scroll-behavior:smooth;
+
 }
 
 body{
@@ -76,53 +131,40 @@ body{
 
     overflow-x:hidden;
 
-}
+    -webkit-font-smoothing:antialiased;
 
-/* ---------- TYPOGRAPHY ---------- */
-
-h1{
-
-    font-size:clamp(2.2rem,4vw,3.2rem);
-
-    line-height:1.15;
-
-    font-weight:800;
+    text-rendering:optimizeLegibility;
 
 }
 
-h2{
+img{
 
-    font-size:clamp(1.8rem,3vw,2.4rem);
+    display:block;
 
-    font-weight:700;
-
-}
-
-h3{
-
-    font-size:1.1rem;
-
-    font-weight:700;
+    max-width:100%;
 
 }
 
-p{
+button,
+input,
+textarea,
+select{
 
-    color:var(--muted);
-
-}
-
-/* ---------- CONTAINER ---------- */
-
-.container{
-
-    width:min(95%,var(--container));
-
-    margin:auto;
+    font:inherit;
 
 }
 
-/* ---------- LINKS ---------- */
+button{
+
+    cursor:pointer;
+
+}
+
+ul{
+
+    list-style:none;
+
+}
 
 a{
 
@@ -132,7 +174,100 @@ a{
 
 }
 
-/* ---------- BUTTONS ---------- */
+
+/* ----------------------------------------------------------
+   TYPOGRAPHY
+-----------------------------------------------------------*/
+
+h1{
+
+    font-size:clamp(2.4rem,5vw,4rem);
+
+    font-weight:800;
+
+    line-height:1.15;
+
+}
+
+h2{
+
+    font-size:clamp(2rem,4vw,3rem);
+
+    font-weight:700;
+
+    line-height:1.2;
+
+}
+
+h3{
+
+    font-size:1.35rem;
+
+    font-weight:700;
+
+}
+
+h4{
+
+    font-size:1.1rem;
+
+    font-weight:600;
+
+}
+
+p{
+
+    color:var(--muted);
+
+    line-height:1.8;
+
+}
+
+
+/* ----------------------------------------------------------
+   LAYOUT
+-----------------------------------------------------------*/
+
+.container{
+
+    width:min(95%,var(--container));
+
+    margin:auto;
+
+}
+
+.section{
+
+    padding:80px 20px;
+
+}
+
+.section-title{
+
+    color:var(--primary);
+
+    text-align:center;
+
+    margin-bottom:14px;
+
+}
+
+.section-subtitle{
+
+    max-width:720px;
+
+    margin:auto;
+
+    margin-bottom:50px;
+
+    text-align:center;
+
+}
+
+
+/* ----------------------------------------------------------
+   BUTTONS
+-----------------------------------------------------------*/
 
 .btn{
 
@@ -142,19 +277,17 @@ a{
 
     justify-content:center;
 
-    gap:.5rem;
+    gap:10px;
 
-    cursor:pointer;
-
-    transition:.25s;
-
-    border-radius:999px;
-
-    font-weight:600;
+    padding:14px 28px;
 
     border:none;
 
-    text-decoration:none;
+    border-radius:var(--radius-pill);
+
+    font-weight:600;
+
+    transition:var(--transition);
 
 }
 
@@ -164,11 +297,11 @@ a{
 
     color:white;
 
-    padding:.9rem 1.4rem;
-
 }
 
 .btn-primary:hover{
+
+    background:var(--primary);
 
     transform:translateY(-2px);
 
@@ -178,13 +311,11 @@ a{
 
 .btn-outline{
 
-    border:2px solid var(--primary-light);
-
     background:white;
 
-    color:var(--primary-light);
+    color:var(--primary);
 
-    padding:.9rem 1.4rem;
+    border:2px solid var(--primary-light);
 
 }
 
@@ -196,17 +327,20 @@ a{
 
 }
 
-/* ---------- CARDS ---------- */
+
+/* ----------------------------------------------------------
+   CARDS
+-----------------------------------------------------------*/
 
 .card{
 
-    background:white;
+    background:var(--surface);
 
     border-radius:var(--radius-lg);
 
     box-shadow:var(--shadow-sm);
 
-    transition:.25s;
+    transition:var(--transition);
 
 }
 
@@ -218,23 +352,26 @@ a{
 
 }
 
-/* ---------- IMAGES ---------- */
 
-img{
-
-    max-width:100%;
-
-    display:block;
-
-}
-
-/* ---------- FORMS ---------- */
+/* ----------------------------------------------------------
+   FORM ELEMENTS
+-----------------------------------------------------------*/
 
 input,
 textarea,
 select{
 
-    font:inherit;
+    width:100%;
+
+    padding:14px 16px;
+
+    border:1px solid var(--border);
+
+    border-radius:var(--radius-md);
+
+    background:white;
+
+    transition:var(--transition);
 
 }
 
@@ -244,9 +381,24 @@ select:focus{
 
     outline:none;
 
+    border-color:var(--primary-light);
+
+    box-shadow:
+        0 0 0 3px
+        rgba(210,105,30,.15);
+
 }
 
-/* ---------- HELPERS ---------- */
+textarea{
+
+    resize:vertical;
+
+}
+
+
+/* ----------------------------------------------------------
+   UTILITIES
+-----------------------------------------------------------*/
 
 .text-center{
 
@@ -260,12 +412,212 @@ select:focus{
 
 }
 
+.flex{
+
+    display:flex;
+
+}
+
+.grid{
+
+    display:grid;
+
+}
+
+.align-center{
+
+    align-items:center;
+
+}
+
+.justify-center{
+
+    justify-content:center;
+
+}
+
+.justify-between{
+
+    justify-content:space-between;
+
+}
+
+.w-100{
+
+    width:100%;
+
+}
+
+.round{
+
+    border-radius:50%;
+
+}
+
+
+/* ----------------------------------------------------------
+   SPACING
+-----------------------------------------------------------*/
+
 .mt-1{margin-top:var(--space-1);}
 .mt-2{margin-top:var(--space-2);}
 .mt-3{margin-top:var(--space-3);}
 .mt-4{margin-top:var(--space-4);}
+.mt-5{margin-top:var(--space-5);}
+.mt-6{margin-top:var(--space-6);}
 
 .mb-1{margin-bottom:var(--space-1);}
 .mb-2{margin-bottom:var(--space-2);}
 .mb-3{margin-bottom:var(--space-3);}
 .mb-4{margin-bottom:var(--space-4);}
+.mb-5{margin-bottom:var(--space-5);}
+.mb-6{margin-bottom:var(--space-6);}
+
+
+/* ----------------------------------------------------------
+   SCROLLBAR
+-----------------------------------------------------------*/
+
+::-webkit-scrollbar{
+
+    width:10px;
+
+}
+
+::-webkit-scrollbar-track{
+
+    background:#F8E9DA;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:var(--primary-light);
+
+    border-radius:20px;
+
+}
+
+::-webkit-scrollbar-thumb:hover{
+
+    background:var(--primary);
+
+}
+
+
+/* ----------------------------------------------------------
+   TEXT SELECTION
+-----------------------------------------------------------*/
+
+::selection{
+
+    background:var(--primary-light);
+
+    color:white;
+
+}
+
+
+/* ----------------------------------------------------------
+   ACCESSIBILITY
+-----------------------------------------------------------*/
+
+:focus-visible{
+
+    outline:3px solid rgba(210,105,30,.35);
+
+    outline-offset:2px;
+
+}
+
+
+/* ----------------------------------------------------------
+   SIMPLE ANIMATIONS
+-----------------------------------------------------------*/
+
+.fade-in{
+
+    animation:fadeIn .8s ease;
+
+}
+
+.fade-up{
+
+    animation:fadeUp .8s ease;
+
+}
+
+@keyframes fadeIn{
+
+    from{
+
+        opacity:0;
+
+    }
+
+    to{
+
+        opacity:1;
+
+    }
+
+}
+
+@keyframes fadeUp{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(25px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+
+/* ----------------------------------------------------------
+   RESPONSIVE
+-----------------------------------------------------------*/
+
+@media(max-width:768px){
+
+.section{
+
+    padding:60px 18px;
+
+}
+
+.container{
+
+    width:min(94%,var(--container));
+
+}
+
+.btn{
+
+    width:100%;
+
+}
+
+h1{
+
+    font-size:2.2rem;
+
+}
+
+h2{
+
+    font-size:1.8rem;
+
+}
+
+}
