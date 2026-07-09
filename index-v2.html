@@ -320,33 +320,63 @@ footer { background:#3a2817; color:#fff; padding:40px 20px 20px; margin-top:60px
 </head>
 <body>
 
-<div class="top-bar">🚚 Free Shipping on Orders Above ₹999 | 📞 Call: +91-7573951513</div>
+<div class="top-bar">
+    🚚 Free Shipping on Orders Above ₹999
+    <span class="top-divider">|</span>
+    📞 +91-7573951513
+</div>
 
-<header>
-  <div class="nav">
-    <a href="index.html" class="logo">
-  <img src="images/logo.png" alt="Silk Spices Logo">
-  <div class="logo-text">
-    <span>Silk Spices</span>
-    <span class="brand-tag">SILKPATH ENTERPRISE</span>
-  </div>
-</a>
-    <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="#products">Shop</a></li>
-      <li><a href="about.html">About</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-    <div class="nav-actions">
-      <div class="search-box">
-        <input type="search" id="searchInput" placeholder="Search spices...">
-<button id="searchBtn" style="background:none;border:none;cursor:pointer;font-size:20px;">🔍</button>
-      </div>
-      <a href="cart.html" class="cart-btn">
-    🛒 Cart <span class="cart-count" id="cartCount">0</span>
-</a>
+<header class="site-header">
+
+    <div class="nav">
+
+        <!-- Logo -->
+        <a href="index.html" class="logo">
+            <img src="images/logo.png" alt="Silk Spices Logo">
+            <div class="logo-text">
+                <span class="logo-title">Silk Spices</span>
+                <span class="brand-tag">SILKPATH ENTERPRISE</span>
+            </div>
+        </a>
+
+        <!-- Navigation -->
+        <nav class="navigation">
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#products">Shop</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+
+        <!-- Cart -->
+        <a href="cart.html" class="cart-btn">
+            🛒
+            <span>Cart</span>
+            <span class="cart-count" id="cartCount">0</span>
+        </a>
+
     </div>
-  </div>
+
+    <!-- Search remains visible on ALL devices -->
+    <div class="header-search">
+
+        <div class="search-box">
+
+            <input
+                type="search"
+                id="searchInput"
+                placeholder="Search spices, masalas..."
+            >
+
+            <button id="searchBtn">
+                🔍
+            </button>
+
+        </div>
+
+    </div>
+
 </header>
 
 <section class="hero">
